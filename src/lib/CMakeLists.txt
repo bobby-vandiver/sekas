@@ -6,4 +6,7 @@ project(sekas_library)
 # Compiled as a library to facilitate testing.
 ################################
 
-add_library(${PROJECT_NAME} include/simple.h simple.cpp)
+include_directories(include)
+set(sources Symbol.cpp)
+
+add_library(${PROJECT_NAME} ${sources})
