@@ -1,15 +1,10 @@
 #include "Symbol.h"
 
-Symbol::Symbol(std::string name, unsigned long address) {
-	this->name = name;
-	this->address = address;
-}
-
-std::string Symbol::getName() {
+std::string Symbol::getName() const {
 	return name;
 }
 
-unsigned long Symbol::getAddress() {
+unsigned long Symbol::getAddress() const {
 	return address;
 }
 

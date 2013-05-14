@@ -21,9 +21,10 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 include_directories(${sekas_library_SOURCE_DIR}/include ${sekas_library_SOURCE_DIR})
 
-set(sources TestRunner.cpp SymbolTests.cpp)
+set(sources TestRunner.cpp SymbolTests.cpp SymbolTableTests.cpp)
 
 add_executable(unit_tests ${sources})
 
 target_link_libraries(unit_tests sekas_library)
 target_link_libraries(unit_tests gtest gtest_main)
+target_link_libraries(unit_tests gmock gmock_main)
