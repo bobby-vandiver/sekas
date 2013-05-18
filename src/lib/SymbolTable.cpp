@@ -1,5 +1,5 @@
 #include "SymbolTable.h"
-#include <stdexcept>
+#include "IllegalArgumentException.h"
 
 SymbolTable::~SymbolTable() {
 	symbolList.clear();
@@ -17,12 +17,12 @@ void SymbolTable::insert(Symbol *symbol) {
 
 void SymbolTable::throwIfSymbolIsNull(Symbol *symbol) const {
 	if(symbol == NULL)
-		throw std::invalid_argument("Symbol cannot be null!");
+		throw IllegalArgumentException("Symbol cannot be null!");
 }
 
 void SymbolTable::throwIfSymbolAlreadyDefined(Symbol *symbol) const {
 	if(isSymbolInTable(symbol->getName()))
-		throw std::invalid_argument("Symbol already defined!");
+		throw IllegalArgumentException("Symbol already defined!");
 }
 
 void SymbolTable::insertSymbol(Symbol *symbol) {

@@ -2,7 +2,7 @@
 #include "gmock/gmock.h"
 
 #include "SymbolTable.h"
-#include <stdexcept>
+#include "IllegalArgumentException.h"
 
 TEST(SymbolTableTests, IsEmptyReturnsTrueWhenNoSymbolsInTable) {
 	SymbolTable symbolTable = SymbolTable();
@@ -52,7 +52,7 @@ TEST(SymbolTableTests, FindByNameReturnsSymbolWithMultipleSymbolsInTable) {
 
 TEST(SymbolTableTests, InsertNullThrowsException) {
 	SymbolTable symbolTable = SymbolTable();
-	EXPECT_THROW(symbolTable.insert(NULL), std::invalid_argument);
+	EXPECT_THROW(symbolTable.insert(NULL), IllegalArgumentException);
 }
 
 TEST(SymbolTableTests, InsertDuplicateSymbolThrowsException) {
@@ -60,7 +60,7 @@ TEST(SymbolTableTests, InsertDuplicateSymbolThrowsException) {
 	Symbol *symbol1 = new Symbol("foo", 1234);
 	Symbol *symbol2 = new Symbol("foo", 1234);
 	symbolTable.insert(symbol1);
-	EXPECT_THROW(symbolTable.insert(symbol2), std::invalid_argument);
+	EXPECT_THROW(symbolTable.insert(symbol2), IllegalArgumentException);
 	delete symbol1;
 	delete symbol2;
 }
