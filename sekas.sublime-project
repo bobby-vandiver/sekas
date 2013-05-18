@@ -1,0 +1,10 @@
+{
+	"folders":
+	[
+		{
+			"path": "/C/Users/Bob/Desktop/sekas",
+			"folder_exclude_patterns": ["cygwin-build", "msvc"],
+			"file_exclude_patterns": [".gitignore", "*.sublime-project", "*.sublime-workspace"]
+		}
+	]
+}
