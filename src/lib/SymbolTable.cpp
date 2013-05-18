@@ -21,8 +21,11 @@ void SymbolTable::throwIfSymbolIsNull(Symbol *symbol) const {
 }
 
 void SymbolTable::throwIfSymbolAlreadyDefined(Symbol *symbol) const {
-	if(isSymbolInTable(symbol->getName()))
-		throw IllegalArgumentException("Symbol already defined!");
+	std::string name = symbol->getName();
+	if(isSymbolInTable(name)) {
+		std::string message = "Symbol [" + name + "] already defined!";
+		throw IllegalArgumentException(message);
+	}
 }
 
 void SymbolTable::insertSymbol(Symbol *symbol) {
