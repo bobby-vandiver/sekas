@@ -47,6 +47,10 @@ TEST(OperandFactoryTests, AddressDirectOperandUpperRegisterLimit) {
 	testOperandReturnsType("a7", "address direct");
 }
 
+TEST(OperandFactoryTests, AddressDirectOperandExceedsUpperRegisterLimit) {
+	testOperandReturnsType("a8", "invalid");
+}
+
 TEST(OperandFactoryTests, AddressDirectOperandExceedsLength) {
 	testOperandReturnsType("a21", "invalid");
 }

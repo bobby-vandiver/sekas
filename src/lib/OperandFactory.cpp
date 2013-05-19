@@ -24,30 +24,43 @@ std::string OperandFactory::getOperandType(std::string operand) const {
 bool OperandFactory::isDataRegisterDirect(std::string operand) const {
 	if(exceedsMaxDirectRegisterOperandLength(operand))
 		return false;
-
-	char registerType = operand[0];
-	if(registerType != 'D' && registerType != 'd')
+	else if(isRegisterTypeInvalid(operand, 'd', 'D'))
 		return false;
-
-	char registerNumber = operand[1];
-	if(registerNumber < '0' || registerNumber > '7')
+	else if(isRegisterNumberOutOfRange(operand, '0', '7'))
 		return false;
+	else
+		return true;
+}
 
-	return true;
+bool OperandFactory::isAddressRegisterDirect(std::string operand) const {
+	if(exceedsMaxDirectRegisterOperandLength(operand))
+		return false;
+	else if(isRegisterTypeInvalid(operand, 'a', 'A'))
+		return false;
+	else if(isRegisterNumberOutOfRange(operand, '0', '7'))
+		return false;
+	else
+		return true;
 }
 
 bool OperandFactory::exceedsMaxDirectRegisterOperandLength(std::string operand) const {
 	const unsigned int MAX_LENGTH = 2;
 	return operand.length() > MAX_LENGTH;
 }
-bool OperandFactory::isAddressRegisterDirect(std::string operand) const {
-	if(exceedsMaxDirectRegisterOperandLength(operand))
-		return false;
 
+bool OperandFactory::isRegisterTypeInvalid(std::string operand, char lowerCaseType, char upperCaseType) const {
 	char registerType = operand[0];
-	if(registerType != 'A' && registerType != 'a')
+	if(registerType != upperCaseType && registerType != lowerCaseType)
+		return true;
+	else
 		return false;
+}
 
-	return true;
+bool OperandFactory::isRegisterNumberOutOfRange(std::string operand, char lowerBound, char upperBound) const {
+	char registerNumber = operand[1];
+	if(registerNumber < lowerBound || registerNumber > upperBound)
+		return true;
+	else
+		return false;
 }
 

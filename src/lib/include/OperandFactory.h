@@ -17,6 +17,8 @@ private:
 	bool isAddressRegisterDirect(std::string operand) const;
 
 	bool exceedsMaxDirectRegisterOperandLength(std::string operand) const;
+	bool isRegisterTypeInvalid(std::string operand, char lowerCaseType, char upperCaseType) const;
+	bool isRegisterNumberOutOfRange(std::string operand, char lowerBound, char upperBound) const;
 };
 
 #endif
