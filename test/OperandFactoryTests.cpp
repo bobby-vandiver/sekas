@@ -142,3 +142,43 @@ TEST(OperandFactoryTests, AddressIndirectPostIncrementOperandInvalidOperator) {
 TEST(OperandFactoryTests, AddressIndirectPostIncrementOperandNoParentheses) {
 	testOperandReturnsType("!a3@+", "invalid");
 }
+
+//===========================================================
+// Address Register Indirect with Pre Decrement
+//===========================================================
+
+TEST(OperandFactoryTests, AddressIndirectPreDecrementOperandUpperCase) {
+	testOperandReturnsType("-(A1)", "address indirect pre decrement");
+}
+
+TEST(OperandFactoryTests, AddressIndirectPreDecrementOperandLowerCase) {
+	testOperandReturnsType("-(a1)", "address indirect pre decrement");
+}
+
+TEST(OperandFactoryTests, AddressIndirectPreDecrementOperandLowerLimit) {
+	testOperandReturnsType("-(a0)", "address indirect pre decrement");
+}
+
+TEST(OperandFactoryTests, AddressIndirectPreDecrementOperandUpperLimit) {
+	testOperandReturnsType("-(a7)", "address indirect pre decrement");
+}
+
+TEST(OperandFactoryTests, AddressIndirectPreDecrementOperandExceedsUpperRegisterLimit) {
+	testOperandReturnsType("-(a8)", "invalid");
+}
+
+TEST(OperandFactoryTests, AddressIndirectPreDecrementOperandInvalidRegister) {
+	testOperandReturnsType("-(d7)", "invalid");
+}
+
+TEST(OperandFactoryTests, AddressIndirectPreDecrementOperandExceedsLength) {
+	testOperandReturnsType("-(a31)", "invalid");
+}
+
+TEST(OperandFactoryTests, AddressIndirectPreDecrementOperandInvalidOperator) {
+	testOperandReturnsType("$(a2)", "invalid");
+}
+
+TEST(OperandFactoryTests, AddressIndirectPreDecrementOperandNoParentheses) {
+	testOperandReturnsType("-!a3@", "invalid");
+}

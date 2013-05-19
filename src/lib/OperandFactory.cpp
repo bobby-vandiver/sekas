@@ -21,6 +21,8 @@ std::string OperandFactory::getOperandType(const std::string &operand) const {
 		return "address indirect";
 	else if(isAddressRegisterIndirectPostIncrement(operand))
 		return "address indirect post increment";
+	else if(isAddressRegisterIndirectPreDecrement(operand))
+		return "address indirect pre decrement";
 	else
 		return "invalid";
 }
@@ -84,6 +86,19 @@ bool OperandFactory::isAddressRegisterIndirectPostIncrement(const std::string &o
 		return false;
 
 	std::string indirectRegister = operand.substr(0, 4);
+	return isAddressRegisterIndirect(indirectRegister);
+}
+
+bool OperandFactory::isAddressRegisterIndirectPreDecrement(const std::string &operand) const {
+	const unsigned int REQUIRED_LENGTH = 5;
+	if(isOperandInvalidLength(operand, REQUIRED_LENGTH))
+		return false;
+
+	char preOperator = operand[0];
+	if(preOperator != '-')
+		return false;
+
+	std::string indirectRegister = operand.substr(1, 4);
 	return isAddressRegisterIndirect(indirectRegister);
 }
 
