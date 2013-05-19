@@ -17,12 +17,14 @@ std::string OperandFactory::getOperandType(const std::string &operand) const {
 		return "data direct";
 	else if(isAddressRegisterDirect(operand))
 		return "address direct";
+	else if(isAddressRegisterIndirect(operand))
+		return "address indirect";
 	else
 		return "invalid";
 }
 
 bool OperandFactory::isDataRegisterDirect(const std::string &operand) const {
-	if(exceedsMaxDirectRegisterOperandLength(operand))
+	if(isOperandInvalidLength(operand, 2))
 		return false;
 	else if(isRegisterTypeInvalid(operand, 'd', 'D'))
 		return false;
@@ -33,7 +35,7 @@ bool OperandFactory::isDataRegisterDirect(const std::string &operand) const {
 }
 
 bool OperandFactory::isAddressRegisterDirect(const std::string &operand) const {
-	if(exceedsMaxDirectRegisterOperandLength(operand))
+	if(isOperandInvalidLength(operand, 2))
 		return false;
 	else if(isRegisterTypeInvalid(operand, 'a', 'A'))
 		return false;
@@ -43,9 +45,27 @@ bool OperandFactory::isAddressRegisterDirect(const std::string &operand) const {
 		return true;
 }
 
-bool OperandFactory::exceedsMaxDirectRegisterOperandLength(const std::string &operand) const {
-	const unsigned int MAX_LENGTH = 2;
-	return operand.length() > MAX_LENGTH;
+bool OperandFactory::isAddressRegisterIndirect(const std::string &operand) const {
+	if(isOperandInvalidLength(operand, 4))
+		return false;
+
+	std::string specifedRegister = operand.substr(1, 2);
+	if(!isAddressRegisterDirect(specifedRegister))
+		return false;
+
+	return true;
+}
+
+bool OperandFactory::isOperandInvalidLength(const std::string &operand, const unsigned int length) const {
+	return exceedsMaxOperandLength(operand, length) || belowMinimumOperandLength(operand, length);
+}
+
+bool OperandFactory::exceedsMaxOperandLength(const std::string &operand, const unsigned int maxLength) const {
+	return operand.length() > maxLength;
+}
+
+bool OperandFactory::belowMinimumOperandLength(const std::string &operand, const unsigned int minimumLength) const {
+	return operand.length() < minimumLength;
 }
 
 bool OperandFactory::isRegisterTypeInvalid(const std::string &operand, char lowerCaseType, char upperCaseType) const {

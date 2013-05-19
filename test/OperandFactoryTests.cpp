@@ -54,3 +54,35 @@ TEST(OperandFactoryTests, AddressDirectOperandExceedsUpperRegisterLimit) {
 TEST(OperandFactoryTests, AddressDirectOperandExceedsLength) {
 	testOperandReturnsType("a21", "invalid");
 }
+
+TEST(OperandFactoryTests, AddressIndirectOperandUpperCase) {
+	testOperandReturnsType("(A1)", "address indirect");
+}
+
+TEST(OperandFactoryTests, AddressIndirectOperandLowerCase) {
+	testOperandReturnsType("(a1)", "address indirect");
+}
+
+TEST(OperandFactoryTests, AddressIndirectOperandLowerLimit) {
+	testOperandReturnsType("(a0)", "address indirect");
+}
+
+TEST(OperandFactoryTests, AddressIndirectOperandUpperLimit) {
+	testOperandReturnsType("(a7)", "address indirect");
+}
+
+TEST(OperandFactoryTests, AddressIndirectOperandExceedsUpperRegisterLimit) {
+	testOperandReturnsType("(a8)", "invalid");
+}
+
+TEST(OperandFactoryTests, AddressIndirectOperandInvalidRegister) {
+	testOperandReturnsType("(d7)", "invalid");
+}
+
+TEST(OperandFactoryTests, AddressIndirectOperandExceedsLength) {
+	testOperandReturnsType("(a31)", "invalid");
+}
+
+TEST(OperandFactoryTests, AddressIndirectOperandInvalidLength) {
+	testOperandReturnsType("(a1", "invalid");
+}
