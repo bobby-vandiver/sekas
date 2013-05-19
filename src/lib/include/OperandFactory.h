@@ -23,6 +23,11 @@ private:
 
 	bool isRegisterTypeInvalid(const std::string &operand, char lowerCaseType, char upperCaseType) const;
 	bool isRegisterNumberOutOfRange(const std::string &operand, char lowerBound, char upperBound) const;
+
+	bool isDataRegister(const std::string &operand) const;
+	bool isAddressRegister(const std::string &operand) const;
+
+	bool isValidRegister(const std::string &operand, char lowerCaseType, char upperCaseType) const;
 };
 
 #endif

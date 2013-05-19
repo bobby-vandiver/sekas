@@ -24,20 +24,26 @@ std::string OperandFactory::getOperandType(const std::string &operand) const {
 }
 
 bool OperandFactory::isDataRegisterDirect(const std::string &operand) const {
-	if(isOperandInvalidLength(operand, 2))
-		return false;
-	else if(isRegisterTypeInvalid(operand, 'd', 'D'))
-		return false;
-	else if(isRegisterNumberOutOfRange(operand, '0', '7'))
-		return false;
-	else
-		return true;
+	return isDataRegister(operand);
+}
+
+bool OperandFactory::isDataRegister(const std::string &operand) const {
+	return isValidRegister(operand, 'd', 'D');
+}
+
+bool OperandFactory::isAddressRegister(const std::string &operand) const {
+	return isValidRegister(operand, 'a', 'A');
 }
 
 bool OperandFactory::isAddressRegisterDirect(const std::string &operand) const {
-	if(isOperandInvalidLength(operand, 2))
+	return isAddressRegister(operand);
+}
+
+bool OperandFactory::isValidRegister(const std::string &operand, char lowerCaseType, char upperCaseType) const {
+	const unsigned int REQUIRED_LENGTH = 2;
+	if(isOperandInvalidLength(operand, REQUIRED_LENGTH))
 		return false;
-	else if(isRegisterTypeInvalid(operand, 'a', 'A'))
+	else if(isRegisterTypeInvalid(operand, lowerCaseType, upperCaseType))
 		return false;
 	else if(isRegisterNumberOutOfRange(operand, '0', '7'))
 		return false;
@@ -46,11 +52,12 @@ bool OperandFactory::isAddressRegisterDirect(const std::string &operand) const {
 }
 
 bool OperandFactory::isAddressRegisterIndirect(const std::string &operand) const {
-	if(isOperandInvalidLength(operand, 4))
+	const unsigned int REQUIRED_LENGTH = 4;
+	if(isOperandInvalidLength(operand, REQUIRED_LENGTH))
 		return false;
 
 	std::string specifedRegister = operand.substr(1, 2);
-	if(!isAddressRegisterDirect(specifedRegister))
+	if(!isAddressRegister(specifedRegister))
 		return false;
 
 	return true;

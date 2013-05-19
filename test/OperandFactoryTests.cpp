@@ -7,6 +7,10 @@ void testOperandReturnsType(std::string operand, std::string expectedType) {
 	EXPECT_EQ(expectedType, actualType);
 }
 
+//===========================================================
+// Data Register Direct
+//===========================================================
+
 TEST(OperandFactoryTests, DataDirectOperandUpperCase) {
 	testOperandReturnsType("D1", "data direct");
 }
@@ -31,6 +35,10 @@ TEST(OperandFactoryTests, DataDirectOperandExceedsLength) {
 	testOperandReturnsType("d00", "invalid");
 }
 
+//===========================================================
+// Address Register Direct
+//===========================================================
+
 TEST(OperandFactoryTests, AddressDirectOperandUpperCase) {
 	testOperandReturnsType("A1", "address direct");
 }
@@ -54,6 +62,10 @@ TEST(OperandFactoryTests, AddressDirectOperandExceedsUpperRegisterLimit) {
 TEST(OperandFactoryTests, AddressDirectOperandExceedsLength) {
 	testOperandReturnsType("a21", "invalid");
 }
+
+//===========================================================
+// Address Register Indirect
+//===========================================================
 
 TEST(OperandFactoryTests, AddressIndirectOperandUpperCase) {
 	testOperandReturnsType("(A1)", "address indirect");
@@ -86,3 +98,7 @@ TEST(OperandFactoryTests, AddressIndirectOperandExceedsLength) {
 TEST(OperandFactoryTests, AddressIndirectOperandInvalidLength) {
 	testOperandReturnsType("(a1", "invalid");
 }
+
+//===========================================================
+// Address Register Indirect
+//===========================================================
