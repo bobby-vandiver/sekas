@@ -12,7 +12,7 @@ OperandFactory *OperandFactory::getInstance() {
 	return instance;
 }
 
-std::string OperandFactory::getOperandType(std::string operand) const {
+std::string OperandFactory::getOperandType(const std::string &operand) const {
 	if(isDataRegisterDirect(operand))
 		return "data direct";
 	else if(isAddressRegisterDirect(operand))
@@ -21,7 +21,7 @@ std::string OperandFactory::getOperandType(std::string operand) const {
 		return "invalid";
 }
 
-bool OperandFactory::isDataRegisterDirect(std::string operand) const {
+bool OperandFactory::isDataRegisterDirect(const std::string &operand) const {
 	if(exceedsMaxDirectRegisterOperandLength(operand))
 		return false;
 	else if(isRegisterTypeInvalid(operand, 'd', 'D'))
@@ -32,7 +32,7 @@ bool OperandFactory::isDataRegisterDirect(std::string operand) const {
 		return true;
 }
 
-bool OperandFactory::isAddressRegisterDirect(std::string operand) const {
+bool OperandFactory::isAddressRegisterDirect(const std::string &operand) const {
 	if(exceedsMaxDirectRegisterOperandLength(operand))
 		return false;
 	else if(isRegisterTypeInvalid(operand, 'a', 'A'))
@@ -43,12 +43,12 @@ bool OperandFactory::isAddressRegisterDirect(std::string operand) const {
 		return true;
 }
 
-bool OperandFactory::exceedsMaxDirectRegisterOperandLength(std::string operand) const {
+bool OperandFactory::exceedsMaxDirectRegisterOperandLength(const std::string &operand) const {
 	const unsigned int MAX_LENGTH = 2;
 	return operand.length() > MAX_LENGTH;
 }
 
-bool OperandFactory::isRegisterTypeInvalid(std::string operand, char lowerCaseType, char upperCaseType) const {
+bool OperandFactory::isRegisterTypeInvalid(const std::string &operand, char lowerCaseType, char upperCaseType) const {
 	char registerType = operand[0];
 	if(registerType != upperCaseType && registerType != lowerCaseType)
 		return true;
@@ -56,7 +56,7 @@ bool OperandFactory::isRegisterTypeInvalid(std::string operand, char lowerCaseTy
 		return false;
 }
 
-bool OperandFactory::isRegisterNumberOutOfRange(std::string operand, char lowerBound, char upperBound) const {
+bool OperandFactory::isRegisterNumberOutOfRange(const std::string &operand, char lowerBound, char upperBound) const {
 	char registerNumber = operand[1];
 	if(registerNumber < lowerBound || registerNumber > upperBound)
 		return true;

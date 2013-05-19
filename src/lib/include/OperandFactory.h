@@ -6,19 +6,19 @@
 class OperandFactory {
 public:
 	static OperandFactory* getInstance();
-	std::string getOperandType(std::string operand) const;
+	std::string getOperandType(const std::string &operand) const;
 
 private:
 	OperandFactory() {}
 	~OperandFactory();
 	static OperandFactory *instance;
 
-	bool isDataRegisterDirect(std::string operand) const;
-	bool isAddressRegisterDirect(std::string operand) const;
+	bool isDataRegisterDirect(const std::string &operand) const;
+	bool isAddressRegisterDirect(const std::string &operand) const;
 
-	bool exceedsMaxDirectRegisterOperandLength(std::string operand) const;
-	bool isRegisterTypeInvalid(std::string operand, char lowerCaseType, char upperCaseType) const;
-	bool isRegisterNumberOutOfRange(std::string operand, char lowerBound, char upperBound) const;
+	bool exceedsMaxDirectRegisterOperandLength(const std::string &operand) const;
+	bool isRegisterTypeInvalid(const std::string &operand, char lowerCaseType, char upperCaseType) const;
+	bool isRegisterNumberOutOfRange(const std::string &operand, char lowerBound, char upperBound) const;
 };
 
 #endif
