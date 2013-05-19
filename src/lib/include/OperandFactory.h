@@ -16,6 +16,7 @@ private:
 	bool isDataRegisterDirect(const std::string &operand) const;
 	bool isAddressRegisterDirect(const std::string &operand) const;
 	bool isAddressRegisterIndirect(const std::string &operand) const;
+	bool isAddressRegisterIndirectPostIncrement(const std::string &operand) const;
 
 	bool isOperandInvalidLength(const std::string &operand, const unsigned int length) const;
 	bool exceedsMaxOperandLength(const std::string &operand, const unsigned int maxLength) const;
@@ -28,6 +29,7 @@ private:
 	bool isAddressRegister(const std::string &operand) const;
 
 	bool isValidRegister(const std::string &operand, char lowerCaseType, char upperCaseType) const;
+	bool isIndirectRegister(const std::string &operand) const;
 };
 
 #endif

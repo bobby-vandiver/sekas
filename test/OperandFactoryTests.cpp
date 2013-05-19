@@ -99,6 +99,46 @@ TEST(OperandFactoryTests, AddressIndirectOperandInvalidLength) {
 	testOperandReturnsType("(a1", "invalid");
 }
 
+TEST(OperandFactoryTests, AddressIndirectOperandNoParentheses) {
+	testOperandReturnsType("!a1$", "invalid");
+}
+
 //===========================================================
-// Address Register Indirect
+// Address Register Indirect with Post Increment
 //===========================================================
+
+TEST(OperandFactoryTests, AddressIndirectPostIncrementOperandUpperCase) {
+	testOperandReturnsType("(A1)+", "address indirect post increment");
+}
+
+TEST(OperandFactoryTests, AddressIndirectPostIncrementOperandLowerCase) {
+	testOperandReturnsType("(a1)+", "address indirect post increment");
+}
+
+TEST(OperandFactoryTests, AddressIndirectPostIncrementOperandLowerLimit) {
+	testOperandReturnsType("(a0)+", "address indirect post increment");
+}
+
+TEST(OperandFactoryTests, AddressIndirectPostIncrementOperandUpperLimit) {
+	testOperandReturnsType("(a7)+", "address indirect post increment");
+}
+
+TEST(OperandFactoryTests, AddressIndirectPostIncrementOperandExceedsUpperRegisterLimit) {
+	testOperandReturnsType("(a8)+", "invalid");
+}
+
+TEST(OperandFactoryTests, AddressIndirectPostIncrementOperandInvalidRegister) {
+	testOperandReturnsType("(d7)+", "invalid");
+}
+
+TEST(OperandFactoryTests, AddressIndirectPostIncrementOperandExceedsLength) {
+	testOperandReturnsType("(a31)+", "invalid");
+}
+
+TEST(OperandFactoryTests, AddressIndirectPostIncrementOperandInvalidOperator) {
+	testOperandReturnsType("(a2)$", "invalid");
+}
+
+TEST(OperandFactoryTests, AddressIndirectPostIncrementOperandNoParentheses) {
+	testOperandReturnsType("!a3@+", "invalid");
+}

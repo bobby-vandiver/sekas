@@ -19,6 +19,8 @@ std::string OperandFactory::getOperandType(const std::string &operand) const {
 		return "address direct";
 	else if(isAddressRegisterIndirect(operand))
 		return "address indirect";
+	else if(isAddressRegisterIndirectPostIncrement(operand))
+		return "address indirect post increment";
 	else
 		return "invalid";
 }
@@ -52,8 +54,7 @@ bool OperandFactory::isValidRegister(const std::string &operand, char lowerCaseT
 }
 
 bool OperandFactory::isAddressRegisterIndirect(const std::string &operand) const {
-	const unsigned int REQUIRED_LENGTH = 4;
-	if(isOperandInvalidLength(operand, REQUIRED_LENGTH))
+	if(!isIndirectRegister(operand))
 		return false;
 
 	std::string specifedRegister = operand.substr(1, 2);
@@ -61,6 +62,29 @@ bool OperandFactory::isAddressRegisterIndirect(const std::string &operand) const
 		return false;
 
 	return true;
+}
+
+bool OperandFactory::isIndirectRegister(const std::string &operand) const {
+	const unsigned int REQUIRED_LENGTH = 4;
+	if(isOperandInvalidLength(operand, REQUIRED_LENGTH))
+		return false;
+	else if(operand[0] != '(' || operand[3] != ')')
+		return false;
+	else
+		return true;
+}
+
+bool OperandFactory::isAddressRegisterIndirectPostIncrement(const std::string &operand) const {
+	const unsigned int REQUIRED_LENGTH = 5;
+	if(isOperandInvalidLength(operand, REQUIRED_LENGTH))
+		return false;
+
+	char postOperator = operand[4];
+	if(postOperator != '+')
+		return false;
+
+	std::string indirectRegister = operand.substr(0, 4);
+	return isAddressRegisterIndirect(indirectRegister);
 }
 
 bool OperandFactory::isOperandInvalidLength(const std::string &operand, const unsigned int length) const {
