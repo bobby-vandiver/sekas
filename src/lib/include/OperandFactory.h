@@ -35,7 +35,10 @@ private:
 
 	bool isUsingStandardDisplacementNotation(const std::string &operand) const;
 	bool isValidAddressRegisterIndirectWithStandardDisplacementNotation(const std::string &operand) const;
+	
 	bool isValidDisplacement(const std::string &displacement) const;
+	bool isValidDecimalDisplacement(const std::string &displacement) const;
+	bool isValidHexadecimalDisplacement(const std::string &displacement) const;
 
 };
 

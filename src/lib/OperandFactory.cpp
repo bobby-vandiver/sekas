@@ -109,8 +109,29 @@ bool OperandFactory::isValidAddressRegisterIndirectWithStandardDisplacementNotat
 }
 
 bool OperandFactory::isValidDisplacement(const std::string &displacement) const {
+	return isValidDecimalDisplacement(displacement) || isValidHexadecimalDisplacement(displacement);
+}
+
+bool OperandFactory::isValidDecimalDisplacement(const std::string &displacement) const {
 	for(unsigned int i = 0; i < displacement.length(); i++) {
 		if(displacement[i] < '0' || displacement[i] > '9')
+			return false;
+	}
+	return true;
+}
+
+bool OperandFactory::isValidHexadecimalDisplacement(const std::string &displacement) const {
+	if(displacement[0] != '$')
+		return false;
+
+	for(unsigned int i = 1; i < displacement.length(); i++) {
+		char c = displacement[i];
+
+		bool isNumeric = (c >= '0') && (c <= '9');
+		bool isUpperAlpha = (c >= 'A') && (c <= 'F');
+		bool isLowerAlpha = (c >= 'a') && (c <= 'f');
+
+		if(!isNumeric && !isUpperAlpha && !isLowerAlpha)
 			return false;
 	}
 	return true;

@@ -201,3 +201,27 @@ TEST(OperandFactoryTests, AddressRegisterIndirectDisplacementInvalidRegister) {
 TEST(OperandFactoryTests, AddressRegisterIndirectDisplacementInvalidRegisterLength) {
 	testOperandReturnsType("(0,a11)", OperandTypes::InvalidOperand);
 }
+
+TEST(OperandFactoryTests, AddressRegisterIndirectDisplacementLongDecimalDisplacement) {
+	testOperandReturnsType("(123497014123,a1)", OperandTypes::AddressRegisterIndirectDisplacement);
+}
+
+TEST(OperandFactoryTests, AddressRegisterIndirectDisplacementInvalidDecimalDisplacement) {
+	testOperandReturnsType("(123a5,a5)", OperandTypes::InvalidOperand);
+}
+
+TEST(OperandFactoryTests, AddressRegisterIndirectDisplacementMinimumHexadecimalDisplacement) {
+	testOperandReturnsType("($0,a1)", OperandTypes::AddressRegisterIndirectDisplacement);
+}
+
+TEST(OperandFactoryTests, AddressRegisterIndirectDisplacementLongHexadecimalDisplacement) {
+	testOperandReturnsType("($a11249f0,a3)", OperandTypes::AddressRegisterIndirectDisplacement);
+}
+
+TEST(OperandFactoryTests, AddressRegisterIndirectDisplacementInvalidHexadecimalDisplacement) {
+	testOperandReturnsType("($aff1ag,a2)", OperandTypes::InvalidOperand);
+}
+
+TEST(OperandFactoryTests, AddressRegisterIndirectDisplacementUpperCaseHexadecimal) {
+	testOperandReturnsType("($bAdF00D,a4)", OperandTypes::AddressRegisterIndirectDisplacement);
+}
