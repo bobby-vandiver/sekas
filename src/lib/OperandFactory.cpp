@@ -1,4 +1,5 @@
 #include "OperandFactory.h"
+#include "OperandTypes.h"
 
 OperandFactory *OperandFactory::instance = NULL;
 
@@ -14,17 +15,17 @@ OperandFactory *OperandFactory::getInstance() {
 
 std::string OperandFactory::getOperandType(const std::string &operand) const {
 	if(isDataRegisterDirect(operand))
-		return "data direct";
+		return OperandTypes::DataRegisterDirect;
 	else if(isAddressRegisterDirect(operand))
-		return "address direct";
+		return OperandTypes::AddressRegisterDirect;
 	else if(isAddressRegisterIndirect(operand))
-		return "address indirect";
+		return OperandTypes::AddressRegisterIndirect;
 	else if(isAddressRegisterIndirectPostIncrement(operand))
-		return "address indirect post increment";
+		return OperandTypes::AddressRegisterIndirectPostIncrement;
 	else if(isAddressRegisterIndirectPreDecrement(operand))
-		return "address indirect pre decrement";
+		return OperandTypes::AddressRegisterIndirectPreDecrement;
 	else
-		return "invalid";
+		return OperandTypes::InvalidOperand;
 }
 
 bool OperandFactory::isDataRegisterDirect(const std::string &operand) const {
