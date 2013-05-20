@@ -72,6 +72,12 @@ bool OperandUtils::isValidDecimalDisplacement(const std::string &displacement) {
 }
 
 bool OperandUtils::isValidHexadecimalDisplacement(const std::string &displacement) {
+	const unsigned int MINIMUM_LENGTH = 1;
+
+	unsigned int length = displacement.length();
+	if(length <= MINIMUM_LENGTH)
+		return false;
+
 	if(displacement[0] != '$')
 		return false;
 

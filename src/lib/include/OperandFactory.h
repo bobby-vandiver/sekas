@@ -22,6 +22,9 @@ private:
 
 	bool isUsingStandardDisplacementNotation(const std::string &operand) const;
 	bool isValidAddressRegisterIndirectWithStandardDisplacementNotation(const std::string &operand) const;
+
+	bool isUsingPrefixDisplacementNotation(const std::string &operand) const;
+	bool isValidAddressRegisterIndirectWithPrefixDisplacementNotation(const std::string &operand) const;
 };
 
 #endif
