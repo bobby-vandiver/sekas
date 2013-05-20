@@ -7,6 +7,6 @@ project(sekas_library)
 ################################
 
 include_directories(include)
-set(sources Symbol.cpp SymbolTable.cpp OperandFactory.cpp)
+set(sources Symbol.cpp SymbolTable.cpp OperandFactory.cpp OperandUtils.cpp)
 
 add_library(${PROJECT_NAME} ${sources})
