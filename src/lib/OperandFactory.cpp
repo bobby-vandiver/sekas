@@ -24,6 +24,8 @@ std::string OperandFactory::getOperandType(const std::string &operand) const {
 		return OperandTypes::AddressRegisterIndirectPostIncrement;
 	else if(isAddressRegisterIndirectPreDecrement(operand))
 		return OperandTypes::AddressRegisterIndirectPreDecrement;
+	else if(isAddressRegisterIndirectDisplacement(operand))
+		return OperandTypes::AddressRegisterIndirectDisplacement;
 	else
 		return OperandTypes::InvalidOperand;
 }
@@ -45,16 +47,6 @@ bool OperandFactory::isAddressRegisterIndirect(const std::string &operand) const
 		return false;
 
 	return true;
-}
-
-bool OperandFactory::isIndirectRegister(const std::string &operand) const {
-	const unsigned int REQUIRED_LENGTH = 4;
-	if(isOperandInvalidLength(operand, REQUIRED_LENGTH))
-		return false;
-	else if(operand[0] != '(' || operand[3] != ')')
-		return false;
-	else
-		return true;
 }
 
 bool OperandFactory::isAddressRegisterIndirectPostIncrement(const std::string &operand) const {
@@ -83,6 +75,47 @@ bool OperandFactory::isAddressRegisterIndirectPreDecrement(const std::string &op
 	return isAddressRegisterIndirect(indirectRegister);
 }
 
+bool OperandFactory::isAddressRegisterIndirectDisplacement(const std::string &operand) const {
+	if(isUsingStandardDisplacementNotation(operand))
+		return isValidAddressRegisterIndirectWithStandardDisplacementNotation(operand);
+
+	return false;
+}
+
+bool OperandFactory::isUsingStandardDisplacementNotation(const std::string &operand) const {
+	unsigned int lastCharPosition = operand.length() - 1;
+	return (operand[0] == '(') && (operand[lastCharPosition] == ')');
+}
+
+bool OperandFactory::isValidAddressRegisterIndirectWithStandardDisplacementNotation(const std::string &operand) const {
+	unsigned int commaPosition = operand.find(',');
+	if(commaPosition == std::string::npos)
+		return false;
+
+	unsigned int displacementLength = commaPosition - 1;
+	std::string displacement = operand.substr(1, displacementLength);
+	if(!isValidDisplacement(displacement))
+		return false;
+
+	unsigned int registerStartPosition = commaPosition + 1;
+	unsigned int registerEndPosition = operand.length() - 1;
+	unsigned int registerLength = registerEndPosition - registerStartPosition;
+
+	std::string specifedRegister = operand.substr(registerStartPosition, registerLength);
+	if(!isAddressRegister(specifedRegister))
+		return false;
+
+	return true;
+}
+
+bool OperandFactory::isValidDisplacement(const std::string &displacement) const {
+	for(unsigned int i = 0; i < displacement.length(); i++) {
+		if(displacement[i] < '0' || displacement[i] > '9')
+			return false;
+	}
+	return true;
+}
+
 bool OperandFactory::isDataRegister(const std::string &operand) const {
 	return isValidRegister(operand, 'd', 'D');
 }
@@ -98,6 +131,16 @@ bool OperandFactory::isValidRegister(const std::string &operand, char lowerCaseT
 	else if(isRegisterTypeInvalid(operand, lowerCaseType, upperCaseType))
 		return false;
 	else if(isRegisterNumberOutOfRange(operand, '0', '7'))
+		return false;
+	else
+		return true;
+}
+
+bool OperandFactory::isIndirectRegister(const std::string &operand) const {
+	const unsigned int REQUIRED_LENGTH = 4;
+	if(isOperandInvalidLength(operand, REQUIRED_LENGTH))
+		return false;
+	else if(operand[0] != '(' || operand[3] != ')')
 		return false;
 	else
 		return true;

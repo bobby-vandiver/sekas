@@ -190,6 +190,14 @@ TEST(OperandFactoryTests, AddressIndirectPreDecrementOperandNoParentheses) {
 
 //(d16,An) or d16(An)
 
-// TEST(OperandFactoryTests, AddressRegisterIndirectDisplacementDecimalDisplacement) {
-// 	testOperandReturnsType("(134,a1)", )
-// }
+TEST(OperandFactoryTests, AddressRegisterIndirectDisplacementMinimumDecimalDisplacement) {
+	testOperandReturnsType("(0,a1)", OperandTypes::AddressRegisterIndirectDisplacement);
+}
+
+TEST(OperandFactoryTests, AddressRegisterIndirectDisplacementInvalidRegister) {
+	testOperandReturnsType("(0,d1)", OperandTypes::InvalidOperand);
+}
+
+TEST(OperandFactoryTests, AddressRegisterIndirectDisplacementInvalidRegisterLength) {
+	testOperandReturnsType("(0,a11)", OperandTypes::InvalidOperand);
+}

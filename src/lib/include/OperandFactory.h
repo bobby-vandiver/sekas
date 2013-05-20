@@ -18,6 +18,7 @@ private:
 	bool isAddressRegisterIndirect(const std::string &operand) const;
 	bool isAddressRegisterIndirectPostIncrement(const std::string &operand) const;
 	bool isAddressRegisterIndirectPreDecrement(const std::string &operand) const;
+	bool isAddressRegisterIndirectDisplacement(const std::string &operand) const;
 
 	bool isOperandInvalidLength(const std::string &operand, const unsigned int length) const;
 	bool exceedsMaxOperandLength(const std::string &operand, const unsigned int maxLength) const;
@@ -31,6 +32,11 @@ private:
 
 	bool isValidRegister(const std::string &operand, char lowerCaseType, char upperCaseType) const;
 	bool isIndirectRegister(const std::string &operand) const;
+
+	bool isUsingStandardDisplacementNotation(const std::string &operand) const;
+	bool isValidAddressRegisterIndirectWithStandardDisplacementNotation(const std::string &operand) const;
+	bool isValidDisplacement(const std::string &displacement) const;
+
 };
 
 #endif
