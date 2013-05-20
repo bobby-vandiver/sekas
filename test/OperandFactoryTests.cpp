@@ -194,6 +194,10 @@ TEST(OperandFactoryTests, AddressRegisterIndirectDisplacementMinimumDecimalDispl
 	testOperandReturnsType("(0,a1)", OperandTypes::AddressRegisterIndirectDisplacement);
 }
 
+TEST(OperandFactoryTests, AddressRegisterIndirectDisplacementExceedsUpperRegisterLimit) {
+	testOperandReturnsType("(0,a8)", OperandTypes::InvalidOperand);
+}
+
 TEST(OperandFactoryTests, AddressRegisterIndirectDisplacementInvalidRegister) {
 	testOperandReturnsType("(0,d1)", OperandTypes::InvalidOperand);
 }
