@@ -21,7 +21,7 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 include_directories(${sekas_library_SOURCE_DIR}/include ${sekas_library_SOURCE_DIR})
 
-set(sources TestRunner.cpp SymbolTests.cpp SymbolTableTests.cpp OperandFactoryTests.cpp)
+set(sources TestRunner.cpp SymbolTests.cpp SymbolTableTests.cpp OperandFactoryTests.cpp OperandUtilsTests.cpp)
 
 add_executable(unit_tests ${sources})
 
