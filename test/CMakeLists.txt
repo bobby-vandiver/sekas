@@ -19,7 +19,7 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 # Unit Tests
 ################################
 
-include_directories(${sekas_library_SOURCE_DIR}/include ${sekas_library_SOURCE_DIR})
+include_directories(${sekas_library_SOURCE_DIR}/include/symbol ${sekas_library_SOURCE_DIR}/include/exception ${sekas_library_SOURCE_DIR}/include/operand ${sekas_library_SOURCE_DIR})
 
 set(sources TestRunner.cpp SymbolTests.cpp SymbolTableTests.cpp OperandFactoryTests.cpp OperandUtilsTests.cpp DataRegisterDirectOperandTests.cpp)
 
