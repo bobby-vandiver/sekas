@@ -9,7 +9,12 @@ project(sekas_library)
 include_directories(include/symbol include/exception include/operand)
 
 set(symbolSources symbol/Symbol.cpp symbol/SymbolTable.cpp)
-set(operandSources operand/OperandFactory.cpp operand/OperandUtils.cpp operand/DataRegisterDirectOperand.cpp)
+
+set(operandSources
+		operand/OperandFactory.cpp
+		operand/OperandUtils.cpp
+		operand/DataRegisterDirectOperand.cpp
+		operand/AddressRegisterDirectOperand.cpp)
 
 set(sources ${symbolSources} ${operandSources})
 

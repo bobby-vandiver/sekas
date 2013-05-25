@@ -39,6 +39,12 @@ TEST(DataRegisterDirectOperandTests, ConstructorSetsRegisterField) {
 	delete operand;
 }
 
+TEST(DataRegisterDirectOperandTests, ConstructorValidOperand) {
+	EXPECT_NO_THROW(new DataRegisterDirectOperand("d0"));
+	EXPECT_NO_THROW(new DataRegisterDirectOperand("d7"));
+	EXPECT_NO_THROW(new DataRegisterDirectOperand("D5"));
+}
+
 TEST(DataRegisterDirectOperandTests, ConstructorSetsRegisterFieldWithInvalidOperand) {
 	EXPECT_THROW(new DataRegisterDirectOperand("d8"), InvalidOperandException);
 	EXPECT_THROW(new DataRegisterDirectOperand("d"), InvalidOperandException);

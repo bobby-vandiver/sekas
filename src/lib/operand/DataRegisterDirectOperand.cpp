@@ -12,12 +12,11 @@ DataRegisterDirectOperand::DataRegisterDirectOperand(const std::string &operand)
 
 void DataRegisterDirectOperand::throwExceptionIfInvalidOperand(const std::string &operand) {
 	if(!OperandUtils::isDataRegister(operand))
-		throw InvalidOperandException("Operand [" + operand + "] is not a valid data direct operand.");
+		throw InvalidOperandException("Operand [" + operand + "] is not a valid data register direct operand.");
 }
 
 unsigned int DataRegisterDirectOperand::getRegisterNumber(const std::string &operand) {
 	return (unsigned int)(operand[1]) - '0';
-
 }
 
 unsigned int DataRegisterDirectOperand::getExtensionWordCount() const {
