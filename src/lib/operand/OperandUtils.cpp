@@ -5,19 +5,19 @@
 #include <sstream>
 
 namespace OperandUtils {
-	bool isValidRegister(const std::string &operand, char lowerCaseType, char upperCaseType);
+	static bool isValidRegister(const std::string &operand, char lowerCaseType, char upperCaseType);
 
-	void throwExceptionIfLowerCaseAndUpperCaseRepresentDifferentCharacter(char lowerCaseType, char upperCaseType);
-	bool isRegisterTypeInvalid(const std::string &operand, char lowerCaseType, char upperCaseType);
-	bool isRegisterNumberOutOfRange(const std::string &operand, char lowerBound, char upperBound);
+	static void throwExceptionIfLowerCaseAndUpperCaseRepresentDifferentCharacter(char lowerCaseType, char upperCaseType);
+	static bool isRegisterTypeInvalid(const std::string &operand, char lowerCaseType, char upperCaseType);
+	static bool isRegisterNumberOutOfRange(const std::string &operand, char lowerBound, char upperBound);
 
-	bool exceedsMaxOperandLength(const std::string &operand, const unsigned int maxLength);
-	bool belowMinimumOperandLength(const std::string &operand, const unsigned int minimumLength);
+	static bool exceedsMaxOperandLength(const std::string &operand, const unsigned int maxLength);
+	static bool belowMinimumOperandLength(const std::string &operand, const unsigned int minimumLength);
 
 
-	bool isValidDisplacementLength(const std::string &displacement);
-	bool isValidDecimalDisplacement(const std::string &displacement);
-	bool isValidHexadecimalDisplacement(const std::string &displacement);
+	static bool isValidDisplacementLength(const std::string &displacement);
+	static bool isValidDecimalDisplacement(const std::string &displacement);
+	static bool isValidHexadecimalDisplacement(const std::string &displacement);
 
 
 	bool isDataRegister(const std::string &operand) {
@@ -28,7 +28,7 @@ namespace OperandUtils {
 		return isValidRegister(operand, 'a', 'A');
 	}
 
-	bool isValidRegister(const std::string &operand, char lowerCaseType, char upperCaseType) {
+	static bool isValidRegister(const std::string &operand, char lowerCaseType, char upperCaseType) {
 		const unsigned int REQUIRED_LENGTH = 2;
 
 		throwExceptionIfLowerCaseAndUpperCaseRepresentDifferentCharacter(lowerCaseType, upperCaseType);
@@ -43,13 +43,41 @@ namespace OperandUtils {
 			return true;
 	}
 
-	void throwExceptionIfLowerCaseAndUpperCaseRepresentDifferentCharacter(char lowerCaseType, char upperCaseType) {
+	static void throwExceptionIfLowerCaseAndUpperCaseRepresentDifferentCharacter(char lowerCaseType, char upperCaseType) {
 		if(toupper(lowerCaseType) != upperCaseType) {
 			std::ostringstream messageStream;
 			messageStream << "lower case register type [" << lowerCaseType << "]";
 			messageStream << "must represent same register as upper case [" << upperCaseType << "]";
 			throw IllegalArgumentException(messageStream.str());
 		}
+	}
+
+	bool isOperandInvalidLength(const std::string &operand, const unsigned int length) {
+		return exceedsMaxOperandLength(operand, length) || belowMinimumOperandLength(operand, length);
+	}
+
+	static bool exceedsMaxOperandLength(const std::string &operand, const unsigned int maxLength) {
+		return operand.length() > maxLength;
+	}
+
+	static bool belowMinimumOperandLength(const std::string &operand, const unsigned int minimumLength) {
+		return operand.length() < minimumLength;
+	}
+
+	static bool isRegisterTypeInvalid(const std::string &operand, char lowerCaseType, char upperCaseType) {
+		char registerType = operand[0];
+		if(registerType != upperCaseType && registerType != lowerCaseType)
+			return true;
+		else
+			return false;
+	}
+
+	static bool isRegisterNumberOutOfRange(const std::string &operand, char lowerBound, char upperBound) {
+		char registerNumber = operand[1];
+		if(registerNumber < lowerBound || registerNumber > upperBound)
+			return true;
+		else
+			return false;
 	}
 
 	bool isIndirectRegister(const std::string &operand) {
@@ -62,40 +90,11 @@ namespace OperandUtils {
 			return true;
 	}
 
-	bool isOperandInvalidLength(const std::string &operand, const unsigned int length) {
-		return exceedsMaxOperandLength(operand, length) || belowMinimumOperandLength(operand, length);
-	}
-
-	bool exceedsMaxOperandLength(const std::string &operand, const unsigned int maxLength) {
-		return operand.length() > maxLength;
-	}
-
-	bool belowMinimumOperandLength(const std::string &operand, const unsigned int minimumLength) {
-		return operand.length() < minimumLength;
-	}
-
-	bool isRegisterTypeInvalid(const std::string &operand, char lowerCaseType, char upperCaseType) {
-		char registerType = operand[0];
-		if(registerType != upperCaseType && registerType != lowerCaseType)
-			return true;
-		else
-			return false;
-	}
-
-	bool isRegisterNumberOutOfRange(const std::string &operand, char lowerBound, char upperBound) {
-		char registerNumber = operand[1];
-		if(registerNumber < lowerBound || registerNumber > upperBound)
-			return true;
-		else
-			return false;
-	}
-
-
 	bool isValidDisplacement(const std::string &displacement) {
 		return isValidDecimalDisplacement(displacement) || isValidHexadecimalDisplacement(displacement);
 	}
 
-	bool isValidDecimalDisplacement(const std::string &displacement) {
+	static bool isValidDecimalDisplacement(const std::string &displacement) {
 		const unsigned int MINIMUM_LENGTH = 1;
 
 		unsigned int length = displacement.length();
@@ -109,7 +108,7 @@ namespace OperandUtils {
 		return true;
 	}
 
-	bool isValidHexadecimalDisplacement(const std::string &displacement) {
+	static bool isValidHexadecimalDisplacement(const std::string &displacement) {
 		const unsigned int MINIMUM_LENGTH = 1;
 
 		unsigned int length = displacement.length();
