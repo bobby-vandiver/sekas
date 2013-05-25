@@ -6,6 +6,10 @@
 
 #include <cstdlib>
 
+bool AddressRegisterDirectOperand::isAddressRegisterDirect(const std::string &operand) {
+	return OperandUtils::isAddressRegister(operand);
+}
+
 AddressRegisterDirectOperand::AddressRegisterDirectOperand(const std::string &operand) {
 	throwExceptionIfInvalidOperand(operand);
 	registerNumber = getRegisterNumber(operand);

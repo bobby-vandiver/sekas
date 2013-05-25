@@ -3,6 +3,7 @@
 #include "OperandUtils.h"
 
 #include "DataRegisterDirectOperand.h"
+#include "AddressRegisterDirectOperand.h"
 
 OperandFactory *OperandFactory::instance = NULL;
 
@@ -38,7 +39,7 @@ bool OperandFactory::isDataRegisterDirect(const std::string &operand) const {
 }
 
 bool OperandFactory::isAddressRegisterDirect(const std::string &operand) const {
-	return OperandUtils::isAddressRegister(operand);
+	return AddressRegisterDirectOperand::isAddressRegisterDirect(operand);
 }
 
 bool OperandFactory::isAddressRegisterIndirect(const std::string &operand) const {

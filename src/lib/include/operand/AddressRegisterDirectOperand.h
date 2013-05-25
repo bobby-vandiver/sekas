@@ -6,6 +6,8 @@
 
 class AddressRegisterDirectOperand : public Operand {
 public:
+	static bool isAddressRegisterDirect(const std::string &operand);
+
 	AddressRegisterDirectOperand(const std::string &operand);
 
 	virtual ~AddressRegisterDirectOperand() {}

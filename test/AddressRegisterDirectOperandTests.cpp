@@ -50,3 +50,27 @@ TEST(AddressRegisterDirectOperandTests, ConstructorSetsRegisterFieldWithInvalidO
 	EXPECT_THROW(new AddressRegisterDirectOperand("a33"), InvalidOperandException);
 	EXPECT_THROW(new AddressRegisterDirectOperand("d1"), InvalidOperandException);
 }
+
+TEST(AddressRegisterDirectOperandTests, IsAddressRegisterDirectUpperCase) {
+	EXPECT_TRUE(AddressRegisterDirectOperand::isAddressRegisterDirect("A1"));
+}
+
+TEST(AddressRegisterDirectOperandTests, IsAddressRegisterDirectLowerCase) {
+	EXPECT_TRUE(AddressRegisterDirectOperand::isAddressRegisterDirect("a1"));
+}
+
+TEST(AddressRegisterDirectOperandTests, IsAddressRegisterDirectLowerRegisterLimit) {
+	EXPECT_TRUE(AddressRegisterDirectOperand::isAddressRegisterDirect("a0"));
+}
+
+TEST(AddressRegisterDirectOperandTests, IsAddressRegisterDirectUpperRegisterLimit) {
+	EXPECT_TRUE(AddressRegisterDirectOperand::isAddressRegisterDirect("a7"));
+}
+
+TEST(AddressRegisterDirectOperandTests, IsAddressRegisterDirectExceedsUpperRegisterLimit) {
+	EXPECT_FALSE(AddressRegisterDirectOperand::isAddressRegisterDirect("a8"));
+}
+
+TEST(AddressRegisterDirectOperandTests, IsAddressRegisterDirectExceedsLength) {
+	EXPECT_FALSE(AddressRegisterDirectOperand::isAddressRegisterDirect("a21"));
+}
