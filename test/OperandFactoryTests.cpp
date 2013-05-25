@@ -9,34 +9,6 @@ void testOperandReturnsType(std::string operand, std::string expectedType) {
 }
 
 //===========================================================
-// Data Register Direct
-//===========================================================
-
-TEST(OperandFactoryTests, DataDirectOperandUpperCase) {
-	testOperandReturnsType("D1", OperandTypes::DataRegisterDirect);
-}
-
-TEST(OperandFactoryTests, DataDirectOperandLowerCase) {
-	testOperandReturnsType("d1", OperandTypes::DataRegisterDirect);
-}
-
-TEST(OperandFactoryTests, DataDirectOperandLowerRegisterLimit) {
-	testOperandReturnsType("d0", OperandTypes::DataRegisterDirect);
-}
-
-TEST(OperandFactoryTests, DataDirectOperandUpperRegisterLimit) {
-	testOperandReturnsType("d7", OperandTypes::DataRegisterDirect);
-}
-
-TEST(OperandFactoryTests, DataDirectOperandExceedsUpperRegisterLimit) {
-	testOperandReturnsType("d8", OperandTypes::InvalidOperand);
-}
-
-TEST(OperandFactoryTests, DataDirectOperandExceedsLength) {
-	testOperandReturnsType("d00", OperandTypes::InvalidOperand);
-}
-
-//===========================================================
 // Address Register Direct
 //===========================================================
 

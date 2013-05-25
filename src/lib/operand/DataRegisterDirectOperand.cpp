@@ -5,13 +5,17 @@
 
 #include <cstdlib>
 
+bool DataRegisterDirectOperand::isDataRegisterDirect(const std::string &operand) {
+	return OperandUtils::isDataRegister(operand);
+}
+
 DataRegisterDirectOperand::DataRegisterDirectOperand(const std::string &operand) {
 	throwExceptionIfInvalidOperand(operand);
 	registerNumber = getRegisterNumber(operand);
 }
 
 void DataRegisterDirectOperand::throwExceptionIfInvalidOperand(const std::string &operand) {
-	if(!OperandUtils::isDataRegister(operand))
+	if(!isDataRegisterDirect(operand))
 		throw InvalidOperandException("Operand [" + operand + "] is not a valid data register direct operand.");
 }
 

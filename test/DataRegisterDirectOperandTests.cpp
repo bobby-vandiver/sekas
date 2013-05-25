@@ -51,3 +51,27 @@ TEST(DataRegisterDirectOperandTests, ConstructorSetsRegisterFieldWithInvalidOper
 	EXPECT_THROW(new DataRegisterDirectOperand("d33"), InvalidOperandException);
 	EXPECT_THROW(new DataRegisterDirectOperand("a1"), InvalidOperandException);
 }
+
+TEST(DataRegisterDirectOperandTests, IsDataRegisterDirectUpperCase) {
+	EXPECT_TRUE(DataRegisterDirectOperand::isDataRegisterDirect("D1"));
+}
+
+TEST(DataRegisterDirectOperandTests, IsDataRegisterDirectLowerCase) {
+	EXPECT_TRUE(DataRegisterDirectOperand::isDataRegisterDirect("d1"));
+}
+
+TEST(DataRegisterDirectOperandTests, IsDataRegisterDirectLowerRegisterLimit) {
+	EXPECT_TRUE(DataRegisterDirectOperand::isDataRegisterDirect("d0"));
+}
+
+TEST(DataRegisterDirectOperandTests, IsDataRegisterDirectUpperRegisterLimit) {
+	EXPECT_TRUE(DataRegisterDirectOperand::isDataRegisterDirect("d7"));
+}
+
+TEST(DataRegisterDirectOperandTests, IsDataRegisterDirectExceedsUpperRegisterLimit) {
+	EXPECT_FALSE(DataRegisterDirectOperand::isDataRegisterDirect("d8"));
+}
+
+TEST(DataRegisterDirectOperandTests, IsDataRegisterDirectExceedsLength) {
+	EXPECT_FALSE(DataRegisterDirectOperand::isDataRegisterDirect("d00"));
+}

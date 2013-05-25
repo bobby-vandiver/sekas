@@ -2,6 +2,8 @@
 #include "OperandTypes.h"
 #include "OperandUtils.h"
 
+#include "DataRegisterDirectOperand.h"
+
 OperandFactory *OperandFactory::instance = NULL;
 
 OperandFactory::~OperandFactory() {
@@ -32,7 +34,7 @@ std::string OperandFactory::getOperandType(const std::string &operand) const {
 }
 
 bool OperandFactory::isDataRegisterDirect(const std::string &operand) const {
-	return OperandUtils::isDataRegister(operand);
+	return DataRegisterDirectOperand::isDataRegisterDirect(operand);
 }
 
 bool OperandFactory::isAddressRegisterDirect(const std::string &operand) const {

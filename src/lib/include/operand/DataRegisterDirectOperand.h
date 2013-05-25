@@ -6,6 +6,8 @@
 
 class DataRegisterDirectOperand : public Operand {
 public:
+	static bool isDataRegisterDirect(const std::string &operand);
+
 	DataRegisterDirectOperand(const std::string &operand);
 
 	virtual ~DataRegisterDirectOperand() {}
