@@ -40,6 +40,7 @@ TEST(DataRegisterDirectOperandTests, ConstructorSetsRegisterField) {
 }
 
 TEST(DataRegisterDirectOperandTests, ConstructorSetsRegisterFieldWithInvalidOperand) {
+	EXPECT_THROW(new DataRegisterDirectOperand("d8"), InvalidOperandException);
 	EXPECT_THROW(new DataRegisterDirectOperand("d"), InvalidOperandException);
 	EXPECT_THROW(new DataRegisterDirectOperand("d33"), InvalidOperandException);
 	EXPECT_THROW(new DataRegisterDirectOperand("a1"), InvalidOperandException);
