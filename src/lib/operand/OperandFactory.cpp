@@ -4,6 +4,7 @@
 
 #include "DataRegisterDirectOperand.h"
 #include "AddressRegisterDirectOperand.h"
+#include "AddressRegisterIndirectOperand.h"
 
 OperandFactory *OperandFactory::instance = NULL;
 
@@ -43,14 +44,7 @@ bool OperandFactory::isAddressRegisterDirect(const std::string &operand) const {
 }
 
 bool OperandFactory::isAddressRegisterIndirect(const std::string &operand) const {
-	if(!OperandUtils::isIndirectRegister(operand))
-		return false;
-
-	std::string specifedRegister = operand.substr(1, 2);
-	if(!OperandUtils::isAddressRegister(specifedRegister))
-		return false;
-
-	return true;
+	return AddressRegisterIndirectOperand::isAddressRegisterIndirect(operand);
 }
 
 bool OperandFactory::isAddressRegisterIndirectPostIncrement(const std::string &operand) const {
