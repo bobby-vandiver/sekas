@@ -16,7 +16,8 @@ set(operandSources
 		operand/DataRegisterDirectOperand.cpp
 		operand/AddressRegisterDirectOperand.cpp
 		operand/AddressRegisterIndirectOperand.cpp
-		operand/AddressRegisterIndirectPostIncrementOperand.cpp)
+		operand/AddressRegisterIndirectPostIncrementOperand.cpp
+		operand/AddressRegisterIndirectPreDecrementOperand.cpp)
 
 set(sources ${symbolSources} ${operandSources})
 
