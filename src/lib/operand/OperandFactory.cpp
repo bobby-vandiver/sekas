@@ -5,6 +5,7 @@
 #include "DataRegisterDirectOperand.h"
 #include "AddressRegisterDirectOperand.h"
 #include "AddressRegisterIndirectOperand.h"
+#include "AddressRegisterIndirectPostIncrementOperand.h"
 
 OperandFactory *OperandFactory::instance = NULL;
 
@@ -48,16 +49,7 @@ bool OperandFactory::isAddressRegisterIndirect(const std::string &operand) const
 }
 
 bool OperandFactory::isAddressRegisterIndirectPostIncrement(const std::string &operand) const {
-	const unsigned int REQUIRED_LENGTH = 5;
-	if(OperandUtils::isOperandInvalidLength(operand, REQUIRED_LENGTH))
-		return false;
-
-	char postOperator = operand[4];
-	if(postOperator != '+')
-		return false;
-
-	std::string indirectRegister = operand.substr(0, 4);
-	return isAddressRegisterIndirect(indirectRegister);
+	return AddressRegisterIndirectPostIncrementOperand::isAddressRegisterIndirectPostIncrement(operand);
 }
 
 bool OperandFactory::isAddressRegisterIndirectPreDecrement(const std::string &operand) const {

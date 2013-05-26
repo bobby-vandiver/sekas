@@ -56,14 +56,14 @@ TEST(OperandUtilsTests, IsAddressRegisterReturnsFalseForInvalidRegister) {
 
 //=======================================================
 
-TEST(OperandUtilsTests, IsIndirectRegisterReturnsTrueForValidOperand) {
-	EXPECT_TRUE(isIndirectRegister("(a3)"));
+TEST(OperandUtilsTests, IsIndirectAddressRegisterReturnsTrueForValidOperand) {
+	EXPECT_TRUE(isIndirectAddressRegister("(a3)"));
 }
 
-TEST(OperandUtilsTests, IsIndirectRegisterReturnsFalseForInvalidOperand) {
-	EXPECT_FALSE(isIndirectRegister("a3"));
-	EXPECT_FALSE(isIndirectRegister("(a3"));
-	EXPECT_FALSE(isIndirectRegister("a3)"));
+TEST(OperandUtilsTests, IsIndirectAddressRegisterReturnsFalseForInvalidOperand) {
+	EXPECT_FALSE(isIndirectAddressRegister("a3"));
+	EXPECT_FALSE(isIndirectAddressRegister("(a3"));
+	EXPECT_FALSE(isIndirectAddressRegister("a3)"));
 }
 
 //=======================================================

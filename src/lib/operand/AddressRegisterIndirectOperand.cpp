@@ -7,14 +7,7 @@
 #include <cstdlib>
 
 bool AddressRegisterIndirectOperand::isAddressRegisterIndirect(const std::string &operand) {
-	if(!OperandUtils::isIndirectRegister(operand))
-		return false;
-
-	std::string addressRegister = operand.substr(1, 2);
-	if(!OperandUtils::isAddressRegister(addressRegister))
-		return false;
-
-	return true;
+	return OperandUtils::isIndirectAddressRegister(operand);
 }
 
 AddressRegisterIndirectOperand::AddressRegisterIndirectOperand(const std::string &operand) {

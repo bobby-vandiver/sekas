@@ -6,7 +6,7 @@
 namespace OperandUtils {
 	bool isDataRegister(const std::string &operand);
 	bool isAddressRegister(const std::string &operand);
-	bool isIndirectRegister(const std::string &operand);
+	bool isIndirectAddressRegister(const std::string &operand);
 
 	bool isOperandInvalidLength(const std::string &operand, const unsigned int length);
 

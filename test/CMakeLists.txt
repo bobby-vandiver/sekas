@@ -27,7 +27,8 @@ set(operandTests
 		operand/OperandUtilsTests.cpp
 		operand/DataRegisterDirectOperandTests.cpp
 		operand/AddressRegisterDirectOperandTests.cpp
-		operand/AddressRegisterIndirectOperandTests.cpp)
+		operand/AddressRegisterIndirectOperandTests.cpp
+		operand/AddressRegisterIndirectPostIncrementOperandTests.cpp)
 
 set(sources TestRunner.cpp ${symbolTests} ${operandTests})
 
