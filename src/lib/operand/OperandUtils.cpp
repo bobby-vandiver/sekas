@@ -1,4 +1,5 @@
 #include "OperandUtils.h"
+#include "NumberUtils.h"
 #include "IllegalArgumentException.h"
 
 #include <cctype>
@@ -129,48 +130,50 @@ namespace OperandUtils {
 		return (unsigned int)(registerNumber) - '0';
 	}
 
-	static bool isValidDisplacementLength(const std::string &displacement);
-	static bool isValidDecimalDisplacement(const std::string &displacement);
-	static bool isValidHexadecimalDisplacement(const std::string &displacement);
-
 	bool isValidDisplacement(const std::string &displacement) {
-		return isValidDecimalDisplacement(displacement) || isValidHexadecimalDisplacement(displacement);
+		return NumberUtils::isValidNumber(displacement);
 	}
 
-	static bool isValidDecimalDisplacement(const std::string &displacement) {
-		const unsigned int MINIMUM_LENGTH = 1;
-
-		unsigned int length = displacement.length();
-		if(length < MINIMUM_LENGTH)
+	bool isValidDisplacement(const std::string &displacement, unsigned long maxDisplacement) {
+		if(!isValidDisplacement(displacement))
 			return false;
 
-		for(unsigned int i = 0; i < displacement.length(); i++) {
-			if(displacement[i] < '0' || displacement[i] > '9')
-				return false;
-		}
-		return true;
+		unsigned long displacementValue = NumberUtils::parseNumber(displacement);
+		return displacementValue <= maxDisplacement;
 	}
 
-	static bool isValidHexadecimalDisplacement(const std::string &displacement) {
-		const unsigned int MINIMUM_LENGTH = 1;
-
-		unsigned int length = displacement.length();
-		if(length <= MINIMUM_LENGTH)
-			return false;
-
-		if(displacement[0] != '$')
-			return false;
-
-		for(unsigned int i = 1; i < displacement.length(); i++) {
-			char c = displacement[i];
-
-			bool isNumeric = (c >= '0') && (c <= '9');
-			bool isUpperAlpha = (c >= 'A') && (c <= 'F');
-			bool isLowerAlpha = (c >= 'a') && (c <= 'f');
-
-			if(!isNumeric && !isUpperAlpha && !isLowerAlpha)
-				return false;
+	static void throwIfWordDisplacementExpectedButActualExceedsMaxWordValue(const unsigned long displacement, const unsigned int size) {
+		if(size == WORD_SIZE && displacement > MAX_WORD_VALUE) {
+			std::ostringstream messageStream;
+			messageStream << "Size specified [" << size << "]";
+			messageStream << "is incompatible with displacement [" << displacement << "].";
+			throw IllegalArgumentException(messageStream.str());
 		}
-		return true;
+	}
+
+	static void throwExceptionForInvalidDisplacementSize(const unsigned long displacement, const unsigned int size) {
+		std::ostringstream messageStream;
+		messageStream << "Size specified [" << size << "]";
+		messageStream << "for displacement [" << displacement << "] is invalid.";
+		throw IllegalArgumentException(messageStream.str());
+	}
+
+	unsigned short *getExtensionWordsFromDisplacement(const std::string &displacement, const unsigned int size) {
+		unsigned long displacementValue = NumberUtils::parseNumber(displacement);
+		unsigned short *extensionWords = new unsigned short[size];
+
+		throwIfWordDisplacementExpectedButActualExceedsMaxWordValue(displacementValue, size);
+
+		if(size == WORD_SIZE) {
+			extensionWords[0] = displacementValue & 0xffff;
+		}
+		else if(size == LONG_SIZE) {
+			extensionWords[0] = (displacementValue & 0xffff0000) >> 16;
+			extensionWords[1] = displacementValue & 0xffff;
+		}
+		else {
+			throwExceptionForInvalidDisplacementSize(displacementValue, size);
+		}
+		return extensionWords;
 	}
 }

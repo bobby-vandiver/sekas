@@ -19,7 +19,11 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 # Unit Tests
 ################################
 
-include_directories(${sekas_library_SOURCE_DIR}/include/symbol ${sekas_library_SOURCE_DIR}/include/exception ${sekas_library_SOURCE_DIR}/include/operand ${sekas_library_SOURCE_DIR})
+include_directories(${sekas_library_SOURCE_DIR}
+	${sekas_library_SOURCE_DIR}/include/symbol
+	${sekas_library_SOURCE_DIR}/include/exception
+	${sekas_library_SOURCE_DIR}/include/operand
+	${sekas_library_SOURCE_DIR}/include/utils)
 
 set(symbolTests symbol/SymbolTests.cpp symbol/SymbolTableTests.cpp)
 set(operandTests
@@ -29,9 +33,12 @@ set(operandTests
 		operand/AddressRegisterDirectOperandTests.cpp
 		operand/AddressRegisterIndirectOperandTests.cpp
 		operand/AddressRegisterIndirectPostIncrementOperandTests.cpp
-		operand/AddressRegisterIndirectPreDecrementOperandTests.cpp)
+		operand/AddressRegisterIndirectPreDecrementOperandTests.cpp
+		operand/AddressRegisterIndirectDisplacementOperandTests.cpp)
 
-set(sources TestRunner.cpp ${symbolTests} ${operandTests})
+set(utilsTests utils/NumberUtilsTests.cpp)
+
+set(sources TestRunner.cpp ${symbolTests} ${operandTests} ${utilsTests})
 
 add_executable(unit_tests ${sources})
 

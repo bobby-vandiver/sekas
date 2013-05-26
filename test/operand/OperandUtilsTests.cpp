@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+#include "gmock/gmock.h"
 #include "OperandUtils.h"
 #include "IllegalArgumentException.h"
 
@@ -108,4 +109,60 @@ TEST(OperandUtilsTests, IsValidDisplacementHexadecimalDisplacement) {
 
 TEST(OperandUtilsTests, IsValidDisplacementInvalidDisplacement) {
 	EXPECT_FALSE(isValidDisplacement("133ga1"));
+}
+
+//=======================================================
+
+TEST(OperandUtilsTests, IsValidDisplacementBelowMaxDisplacement) {
+	EXPECT_TRUE(isValidDisplacement("1234", 1235));
+}
+
+TEST(OperandUtilsTests, IsValidDisplacementMaxDisplacement) {
+	EXPECT_TRUE(isValidDisplacement("1234", 1234));
+}
+
+TEST(OperandUtilsTests, IsValidDisplacementExceedsMaxDisplacement) {
+	EXPECT_FALSE(isValidDisplacement("1234", 1233));
+}
+
+//=======================================================
+
+TEST(OperandUtilsTests, GetExtensionWordsFromDisplacementDecimalWord) {
+	const unsigned int SIZE = WORD_SIZE;
+	const unsigned short expectedExtensionWords[SIZE] = {100};
+	unsigned short *actualExtensionWords = getExtensionWordsFromDisplacement("100", SIZE);
+	EXPECT_THAT(expectedExtensionWords, ::testing::ElementsAreArray(actualExtensionWords, SIZE));
+	delete actualExtensionWords;
+}
+
+TEST(OperandUtilsTests, GetExtensionWordsFromDisplacementDecimalLong) {
+	const unsigned int SIZE = LONG_SIZE;
+	const unsigned short expectedExtensionWords[SIZE] = {0xbc, 0x614e};
+	unsigned short *actualExtensionWords = getExtensionWordsFromDisplacement("12345678", SIZE);
+	EXPECT_THAT(expectedExtensionWords, ::testing::ElementsAreArray(actualExtensionWords, SIZE));
+	delete actualExtensionWords;
+}
+
+TEST(OperandUtilsTests, GetExtensionWordsFromDisplacementHexadecimalWord) {
+	const unsigned int SIZE = WORD_SIZE;
+	const unsigned short expectedExtensionWords[SIZE] = {0xfa23};
+	unsigned short *actualExtensionWords = getExtensionWordsFromDisplacement("$fa23", SIZE);
+	EXPECT_THAT(expectedExtensionWords, ::testing::ElementsAreArray(actualExtensionWords, SIZE));
+	delete actualExtensionWords;
+}
+
+TEST(OperandUtilsTests, GetExtensionWordsFromDisplacementHexadecimalLong) {
+	const unsigned int SIZE = LONG_SIZE;
+	const unsigned short expectedExtensionWords[SIZE] = {0xbaad, 0xf00d};
+	unsigned short *actualExtensionWords = getExtensionWordsFromDisplacement("$baadf00d", SIZE);
+	EXPECT_THAT(expectedExtensionWords, ::testing::ElementsAreArray(actualExtensionWords, SIZE));
+	delete actualExtensionWords;
+}
+
+TEST(OperandUtilsTests, GetExtensionWordsFromDisplacementThrowsExceptionForInvalidSize) {
+	EXPECT_THROW(getExtensionWordsFromDisplacement("100", 3), IllegalArgumentException);
+}
+
+TEST(OperandUtilsTests, GetExtensionWordsFromDisplacementRequestWordWithLongDisplacementThrowsException) {
+	EXPECT_THROW(getExtensionWordsFromDisplacement("$9ab3f", WORD_SIZE), IllegalArgumentException);
 }

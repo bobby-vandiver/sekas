@@ -6,7 +6,7 @@ project(sekas_library)
 # Compiled as a library to facilitate testing.
 ################################
 
-include_directories(include/symbol include/exception include/operand)
+include_directories(include/symbol include/exception include/operand include/utils)
 
 set(symbolSources symbol/Symbol.cpp symbol/SymbolTable.cpp)
 
@@ -17,8 +17,11 @@ set(operandSources
 		operand/AddressRegisterDirectOperand.cpp
 		operand/AddressRegisterIndirectOperand.cpp
 		operand/AddressRegisterIndirectPostIncrementOperand.cpp
-		operand/AddressRegisterIndirectPreDecrementOperand.cpp)
+		operand/AddressRegisterIndirectPreDecrementOperand.cpp
+		operand/AddressRegisterIndirectDisplacementOperand.cpp)
 
-set(sources ${symbolSources} ${operandSources})
+set(utilsSources utils/NumberUtils.cpp)
+
+set(sources ${symbolSources} ${operandSources} ${utilsSources})
 
 add_library(${PROJECT_NAME} ${sources})
