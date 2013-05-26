@@ -16,7 +16,7 @@ AddressRegisterDirectOperand::AddressRegisterDirectOperand(const std::string &op
 }
 
 void AddressRegisterDirectOperand::throwExceptionIfInvalidOperand(const std::string &operand) {
-	if(!OperandUtils::isAddressRegister(operand))
+	if(!isAddressRegisterDirect(operand))
 		throw InvalidOperandException("Operand [" + operand + "] is not a valid address register direct operand.");
 }
 

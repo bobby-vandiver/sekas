@@ -1,16 +1,16 @@
-#ifndef ADDRESS_REGISTER_DIRECT_OPERAND_H
-#define ADDRESS_REGISTER_DIRECT_OPERAND_H
+#ifndef ADDRESS_REGISTER_INDIRECT_OPERAND_H
+#define ADDRESS_REGISTER_INDIRECT_OPERAND_H
 
 #include "Operand.h"
 #include <string>
 
-class AddressRegisterDirectOperand : public Operand {
+class AddressRegisterIndirectOperand : public Operand {
 public:
-	static bool isAddressRegisterDirect(const std::string &operand);
+	static bool isAddressRegisterIndirect(const std::string &operand);
 
-	AddressRegisterDirectOperand(const std::string &operand);
+	AddressRegisterIndirectOperand(const std::string &operand);
 
-	virtual ~AddressRegisterDirectOperand() {}
+	virtual ~AddressRegisterIndirectOperand() {}
 
 	virtual unsigned int getExtensionWordCount() const;	
 	virtual void setExtensionWordCount(const unsigned int count);
@@ -23,7 +23,7 @@ public:
 
 private:
 	static const unsigned int EXTENSION_WORD_COUNT = 0;
-	static const unsigned int MODE_FIELD = 1;
+	static const unsigned int MODE_FIELD = 2;
 
 	unsigned int registerNumber;
 
