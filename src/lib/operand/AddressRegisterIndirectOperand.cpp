@@ -4,8 +4,6 @@
 #include "LogicException.h"
 #include "InvalidOperandException.h"
 
-#include <cstdlib>
-
 bool AddressRegisterIndirectOperand::isAddressRegisterIndirect(const std::string &operand) {
 	return OperandUtils::isIndirectAddressRegister(operand);
 }
