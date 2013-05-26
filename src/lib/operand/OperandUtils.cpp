@@ -90,6 +90,38 @@ namespace OperandUtils {
 			return true;
 	}
 
+	static void throwIfPositionIsInvalid(const std::string &operand, const unsigned int position);
+	static void throwIfRegisterNumberIsInvalid(char registerNumber);
+	static unsigned int convertRegisterNumberToUnsignedInt(char registerNumber);
+
+	unsigned int getRegisterNumber(const std::string &operand, const unsigned int position) {
+		throwIfPositionIsInvalid(operand, position);	
+		char registerNumber = operand[position];
+		throwIfRegisterNumberIsInvalid(registerNumber);
+		return convertRegisterNumberToUnsignedInt(registerNumber);
+	}
+
+	static void throwIfPositionIsInvalid(const std::string &operand, const unsigned int position) {
+		unsigned int length = operand.length();
+		if(position > length) {
+			std::ostringstream messageStream;
+			messageStream << "Position [" << position << "] is invalid for [" << operand << "].";
+			throw IllegalArgumentException(messageStream.str());
+		}
+	}
+
+	static void throwIfRegisterNumberIsInvalid(char registerNumber) {
+		if(registerNumber < '0' || registerNumber > '9') {
+			std::ostringstream messageStream;
+			messageStream << "Register number [" << registerNumber << "] is invalid.";
+			throw IllegalArgumentException(messageStream.str());
+		}
+	}
+
+	static unsigned int convertRegisterNumberToUnsignedInt(char registerNumber) {
+		return (unsigned int)(registerNumber) - '0';
+	}
+
 	bool isValidDisplacement(const std::string &displacement) {
 		return isValidDecimalDisplacement(displacement) || isValidHexadecimalDisplacement(displacement);
 	}

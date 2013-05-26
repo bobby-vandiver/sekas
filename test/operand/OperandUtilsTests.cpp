@@ -68,6 +68,20 @@ TEST(OperandUtilsTests, IsIndirectRegisterReturnsFalseForInvalidOperand) {
 
 //=======================================================
 
+TEST(OperandUtilsTests, GetRegisterNumberReturnsValidRegisterNumber) {
+	EXPECT_EQ(8, getRegisterNumber("B8", 1));
+}
+
+TEST(OperandUtilsTests, GetRegisterNumberThrowsExceptionWhenPositionExceedsLength) {
+	EXPECT_THROW(getRegisterNumber("a1", 2), IllegalArgumentException);
+}
+
+TEST(OperandUtilsTests, GetRegisterNumberThrowsExceptionWhenPositionSpecifiedNotNumber) {
+	EXPECT_THROW(getRegisterNumber("d4", 0), IllegalArgumentException);
+}
+
+//=======================================================
+
 TEST(OperandUtilsTests, IsValidDisplacementMinimumDecimalDisplacement) {
 	EXPECT_TRUE(isValidDisplacement("0"));
 }

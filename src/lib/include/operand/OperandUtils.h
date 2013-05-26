@@ -10,6 +10,8 @@ namespace OperandUtils {
 
 	bool isOperandInvalidLength(const std::string &operand, const unsigned int length);
 
+	unsigned int getRegisterNumber(const std::string &operand, const unsigned int position);
+
 	bool isValidDisplacement(const std::string &displacement);
 }
 

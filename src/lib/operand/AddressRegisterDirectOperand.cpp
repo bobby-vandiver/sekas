@@ -12,16 +12,12 @@ bool AddressRegisterDirectOperand::isAddressRegisterDirect(const std::string &op
 
 AddressRegisterDirectOperand::AddressRegisterDirectOperand(const std::string &operand) {
 	throwExceptionIfInvalidOperand(operand);
-	registerNumber = getRegisterNumber(operand);
+	registerNumber = OperandUtils::getRegisterNumber(operand, REGISTER_NUMBER_POSITION);
 }
 
 void AddressRegisterDirectOperand::throwExceptionIfInvalidOperand(const std::string &operand) {
 	if(!isAddressRegisterDirect(operand))
 		throw InvalidOperandException("Operand [" + operand + "] is not a valid address register direct operand.");
-}
-
-unsigned int AddressRegisterDirectOperand::getRegisterNumber(const std::string &operand) {
-	return (unsigned int)(operand[1]) - '0';
 }
 
 unsigned int AddressRegisterDirectOperand::getExtensionWordCount() const {
