@@ -21,7 +21,15 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 include_directories(${sekas_library_SOURCE_DIR}/include/symbol ${sekas_library_SOURCE_DIR}/include/exception ${sekas_library_SOURCE_DIR}/include/operand ${sekas_library_SOURCE_DIR})
 
-set(sources TestRunner.cpp SymbolTests.cpp SymbolTableTests.cpp OperandFactoryTests.cpp OperandUtilsTests.cpp DataRegisterDirectOperandTests.cpp AddressRegisterDirectOperandTests.cpp AddressRegisterIndirectOperandTests.cpp)
+set(symbolTests symbol/SymbolTests.cpp symbol/SymbolTableTests.cpp)
+set(operandTests
+		operand/OperandFactoryTests.cpp
+		operand/OperandUtilsTests.cpp
+		operand/DataRegisterDirectOperandTests.cpp
+		operand/AddressRegisterDirectOperandTests.cpp
+		operand/AddressRegisterIndirectOperandTests.cpp)
+
+set(sources TestRunner.cpp ${symbolTests} ${operandTests})
 
 add_executable(unit_tests ${sources})
 
