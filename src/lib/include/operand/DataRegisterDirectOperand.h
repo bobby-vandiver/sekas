@@ -24,11 +24,12 @@ public:
 private:
 	static const unsigned int EXTENSION_WORD_COUNT = 0;
 	static const unsigned int MODE_FIELD = 0;
-
 	static const unsigned int REGISTER_NUMBER_POSITION = 1;
+
+	std::string operand;
 	unsigned int registerNumber;
 
-	void throwExceptionIfInvalidOperand(const std::string &operand);
+	void throwExceptionIfInvalidOperand() const;
 };
 
 #endif

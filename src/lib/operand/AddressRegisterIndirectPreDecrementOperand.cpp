@@ -19,11 +19,12 @@ bool AddressRegisterIndirectPreDecrementOperand::isAddressRegisterIndirectPreDec
 }
 
 AddressRegisterIndirectPreDecrementOperand::AddressRegisterIndirectPreDecrementOperand(const std::string &operand) {
-	throwExceptionIfInvalidOperand(operand);
-	registerNumber = OperandUtils::getRegisterNumber(operand, REGISTER_NUMBER_POSITION);
+	this->operand = operand;
+	throwExceptionIfInvalidOperand();
+	this->registerNumber = OperandUtils::getRegisterNumber(operand, REGISTER_NUMBER_POSITION);
 }
 
-void AddressRegisterIndirectPreDecrementOperand::throwExceptionIfInvalidOperand(const std::string &operand) {
+void AddressRegisterIndirectPreDecrementOperand::throwExceptionIfInvalidOperand() const {
 	if(!isAddressRegisterIndirectPreDecrement(operand))
 		throw InvalidOperandException("Operand [" + operand + "] is not a valid address register indirect with pre decrement operand.");
 }

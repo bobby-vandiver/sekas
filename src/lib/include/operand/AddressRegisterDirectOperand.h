@@ -1,4 +1,3 @@
-
 #ifndef ADDRESS_REGISTER_DIRECT_OPERAND_H
 #define ADDRESS_REGISTER_DIRECT_OPERAND_H
 
@@ -27,9 +26,11 @@ private:
 	static const unsigned int MODE_FIELD = 1;
 
 	static const unsigned int REGISTER_NUMBER_POSITION = 1;
-	unsigned int registerNumber;
 
-	void throwExceptionIfInvalidOperand(const std::string &operand);
+	unsigned int registerNumber;
+	std::string operand;
+
+	void throwExceptionIfInvalidOperand() const;
 };
 
 #endif

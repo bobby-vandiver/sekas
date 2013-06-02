@@ -9,11 +9,12 @@ bool AddressRegisterDirectOperand::isAddressRegisterDirect(const std::string &op
 }
 
 AddressRegisterDirectOperand::AddressRegisterDirectOperand(const std::string &operand) {
-	throwExceptionIfInvalidOperand(operand);
-	registerNumber = OperandUtils::getRegisterNumber(operand, REGISTER_NUMBER_POSITION);
+	this->operand = operand;
+	throwExceptionIfInvalidOperand();
+	this->registerNumber = OperandUtils::getRegisterNumber(operand, REGISTER_NUMBER_POSITION);
 }
 
-void AddressRegisterDirectOperand::throwExceptionIfInvalidOperand(const std::string &operand) {
+void AddressRegisterDirectOperand::throwExceptionIfInvalidOperand() const {
 	if(!isAddressRegisterDirect(operand))
 		throw InvalidOperandException("Operand [" + operand + "] is not a valid address register direct operand.");
 }

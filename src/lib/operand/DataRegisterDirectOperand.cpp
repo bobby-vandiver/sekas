@@ -10,11 +10,12 @@ bool DataRegisterDirectOperand::isDataRegisterDirect(const std::string &operand)
 }
 
 DataRegisterDirectOperand::DataRegisterDirectOperand(const std::string &operand) {
-	throwExceptionIfInvalidOperand(operand);
-	registerNumber = OperandUtils::getRegisterNumber(operand, REGISTER_NUMBER_POSITION);
+	this->operand = operand;
+	throwExceptionIfInvalidOperand();
+	this->registerNumber = OperandUtils::getRegisterNumber(operand, REGISTER_NUMBER_POSITION);
 }
 
-void DataRegisterDirectOperand::throwExceptionIfInvalidOperand(const std::string &operand) {
+void DataRegisterDirectOperand::throwExceptionIfInvalidOperand() const {
 	if(!isDataRegisterDirect(operand))
 		throw InvalidOperandException("Operand [" + operand + "] is not a valid data register direct operand.");
 }
