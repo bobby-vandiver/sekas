@@ -4,12 +4,10 @@
 #include <string>
 
 class Symbol {
-
-	static const unsigned long DEFAULT_ADDRESS = 0;
-
 public:
-	Symbol(std::string name, unsigned long address = DEFAULT_ADDRESS)
-		: name(name), address(address) {}
+	static bool isValid(const std::string symbol);
+
+	Symbol(std::string name, unsigned long address = DEFAULT_ADDRESS);
 
 	std::string getName() const;
 
@@ -17,6 +15,8 @@ public:
 	void setAddress(unsigned long address);
 
 private:
+	static const unsigned long DEFAULT_ADDRESS = 0;
+
 	std::string name;
 	unsigned long address;
 };
