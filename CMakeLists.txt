@@ -10,3 +10,5 @@ add_subdirectory(test)
 
 set(SOURCE_FILES main.cpp)
 add_executable(sekas ${SOURCE_FILES})
+
+target_link_libraries(sekas libsekas)
