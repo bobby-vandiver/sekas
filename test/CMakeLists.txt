@@ -1,5 +1,6 @@
 project(tests)
 
+include_directories(../include)
 add_subdirectory(lib)
 
 include_directories(${gmock_SOURCE_DIR}/include ${gmock_SOURCE_DIR})
