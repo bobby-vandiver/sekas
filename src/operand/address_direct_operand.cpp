@@ -1,18 +1,8 @@
 #include "address_direct_operand.h"
-
-namespace {
-    const uint8_t MAX_ADDRESS_REGISTER_NUMBER = 7;
-
-    uint8_t validate_address_register_number(const uint8_t register_number) {
-        if (register_number > MAX_ADDRESS_REGISTER_NUMBER) {
-            throw std::invalid_argument("address register must be between 0 and 7");
-        }
-        return register_number;
-    }
-}
+#include "operand_validation.h"
 
 address_direct_operand::address_direct_operand(const uint8_t register_number) :
-        register_number(validate_address_register_number(register_number)) {
+        register_number(operand_validation::validate_address_register_number(register_number)) {
 }
 
 address_direct_operand::~address_direct_operand() {
