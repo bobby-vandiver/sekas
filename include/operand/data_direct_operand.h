@@ -15,7 +15,7 @@ public:
     virtual uint16_t get_extension_word(const uint8_t idx) const;
 
 private:
-    uint8_t register_number;
+    const uint8_t register_number;
 };
 
 #endif
