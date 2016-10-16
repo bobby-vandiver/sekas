@@ -18,7 +18,7 @@ TYPED_TEST_CASE_P(OperandRegisterNumberTest);
 TYPED_TEST_P(OperandRegisterNumberTest, ValidRegisterNumber) {
     std::array<const uint8_t, 8> numbers = {0, 1, 2, 3, 4, 5, 6, 7};
 
-    for(auto number : numbers) {
+    for (auto number : numbers) {
         EXPECT_EQ(number, create_with_register_number<TypeParam>(number)->get_register_field());
     }
 }
