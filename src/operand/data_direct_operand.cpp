@@ -9,7 +9,7 @@ data_direct_operand::~data_direct_operand() {
 }
 
 uint8_t data_direct_operand::get_mode_field() const {
-    return 0; // 000
+    return 0b000;
 }
 
 uint8_t data_direct_operand::get_register_field() const {

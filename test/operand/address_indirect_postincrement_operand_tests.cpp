@@ -18,7 +18,7 @@ INSTANTIATE_TYPED_TEST_CASE_P(AddressIndirectPostincrementOperand,
                               address_indirect_postincrement_operand);\
 
 TEST_F(AddressIndirectPostincrementOperandTest, GetModeField) {
-    EXPECT_EQ(3, operand.get_mode_field());
+    EXPECT_EQ(0b011, operand.get_mode_field());
 }
 
 TEST_F(AddressIndirectPostincrementOperandTest, GetExtensionWordCount) {

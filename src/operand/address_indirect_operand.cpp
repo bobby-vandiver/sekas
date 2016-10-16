@@ -9,7 +9,7 @@ address_indirect_operand::~address_indirect_operand() {
 }
 
 uint8_t address_indirect_operand::get_mode_field() const {
-    return 2; // 010
+    return 0b010;
 }
 
 uint8_t address_indirect_operand::get_register_field() const {

@@ -16,7 +16,7 @@ operand::ptr create_with_register_number<address_direct_operand>(const uint8_t r
 INSTANTIATE_TYPED_TEST_CASE_P(AddressDirectOperand, OperandRegisterNumberTest, address_direct_operand);
 
 TEST_F(AddressDirectOperandTest, GetModeField) {
-    EXPECT_EQ(1, operand.get_mode_field());
+    EXPECT_EQ(0b001, operand.get_mode_field());
 }
 
 TEST_F(AddressDirectOperandTest, GetExtensionWordCount) {

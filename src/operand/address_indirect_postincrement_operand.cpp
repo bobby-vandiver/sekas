@@ -9,7 +9,7 @@ address_indirect_postincrement_operand::~address_indirect_postincrement_operand(
 }
 
 uint8_t address_indirect_postincrement_operand::get_mode_field() const {
-    return 3; // 011
+    return 0b011;
 }
 
 uint8_t address_indirect_postincrement_operand::get_register_field() const {

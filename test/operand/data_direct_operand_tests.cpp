@@ -16,7 +16,7 @@ operand::ptr create_with_register_number<data_direct_operand>(const uint8_t regi
 INSTANTIATE_TYPED_TEST_CASE_P(DataDirectOperand, OperandRegisterNumberTest, data_direct_operand);
 
 TEST_F(DataDirectOperandTest, GetModeField) {
-    EXPECT_EQ(0, operand.get_mode_field());
+    EXPECT_EQ(0b000, operand.get_mode_field());
 }
 
 TEST_F(DataDirectOperandTest, GetExtensionWordCount) {

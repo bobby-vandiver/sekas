@@ -11,7 +11,7 @@ address_indirect_displacement_operand::~address_indirect_displacement_operand() 
 }
 
 uint8_t address_indirect_displacement_operand::get_mode_field() const {
-    return 5; // 101
+    return 0b101;
 }
 
 uint8_t address_indirect_displacement_operand::get_register_field() const {

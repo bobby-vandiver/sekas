@@ -9,7 +9,7 @@ address_indirect_predecrement_operand::~address_indirect_predecrement_operand() 
 }
 
 uint8_t address_indirect_predecrement_operand::get_mode_field() const {
-    return 4; // 100
+    return 0b100;
 }
 
 uint8_t address_indirect_predecrement_operand::get_register_field() const {
