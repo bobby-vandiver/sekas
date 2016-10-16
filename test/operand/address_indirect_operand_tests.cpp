@@ -10,7 +10,7 @@ protected:
 
 template <>
 operand::ptr create_with_register_number<address_indirect_operand>(const uint8_t register_number) {
-    return std::unique_ptr<address_indirect_operand>(new address_indirect_operand(register_number));
+    return std::make_unique<address_indirect_operand>(register_number);
 }
 
 INSTANTIATE_TYPED_TEST_CASE_P(AddressIndirectOperand, OperandRegisterNumberTest, address_indirect_operand);

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(sekas)
 
-add_definitions(-std=c++1y)
+add_definitions(-std=c++14)
 
 include_directories(include)
 

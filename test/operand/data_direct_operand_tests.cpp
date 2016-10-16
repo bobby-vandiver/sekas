@@ -10,7 +10,7 @@ protected:
 
 template <>
 operand::ptr create_with_register_number<data_direct_operand>(const uint8_t register_number) {
-    return std::unique_ptr<data_direct_operand>(new data_direct_operand(register_number));
+    return std::make_unique<data_direct_operand>(register_number);
 }
 
 INSTANTIATE_TYPED_TEST_CASE_P(DataDirectOperand, OperandRegisterNumberTest, data_direct_operand);
