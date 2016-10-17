@@ -6,8 +6,6 @@
 
 class Operand {
 public:
-    typedef std::unique_ptr<Operand> Ptr;
-
     virtual ~Operand() {}
 
     virtual uint8_t get_mode_field() const = 0;

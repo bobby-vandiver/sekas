@@ -9,7 +9,7 @@ protected:
 };
 
 template <>
-Operand::Ptr create_with_register_number<AddressIndirectPredecrementOperand>(const uint8_t register_number) {
+std::unique_ptr<Operand> create_with_register_number<AddressIndirectPredecrementOperand>(const uint8_t register_number) {
     return std::make_unique<AddressIndirectPredecrementOperand>(register_number);
 }
 

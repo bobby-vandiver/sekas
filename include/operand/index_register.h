@@ -23,8 +23,6 @@ public:
         EIGHT
     };
 
-    typedef std::unique_ptr<IndexRegister> Ptr;
-
     explicit IndexRegister(const uint8_t register_number, Type type, Size size, Scale scale);
     virtual ~IndexRegister();
 
