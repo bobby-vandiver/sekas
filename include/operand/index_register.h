@@ -2,6 +2,7 @@
 #define SEKAS_INDEX_REGISTER_H
 
 #include <cstdint>
+#include <memory>
 
 class index_register {
 public:
@@ -22,13 +23,18 @@ public:
         EIGHT
     };
 
+    typedef std::unique_ptr<index_register> ptr;
+
     explicit index_register(const uint8_t register_number, type type, size size, scale scale);
     virtual ~index_register();
 
     uint8_t get_register_number() const;
+
     type get_type() const;
     size get_size() const;
     scale get_scale() const;
+
+    uint8_t encode() const;
 
 private:
     const uint8_t register_number;
