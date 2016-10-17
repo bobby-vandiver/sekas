@@ -5,15 +5,15 @@
 class AddressDirectOperandTest : public ::testing::Test {
 protected:
     AddressDirectOperandTest() : operand(0) { }
-    address_direct_operand operand;
+    AddressDirectOperand operand;
 };
 
 template <>
-operand::ptr create_with_register_number<address_direct_operand>(const uint8_t register_number) {
-    return std::make_unique<address_direct_operand>(register_number);
+Operand::Ptr create_with_register_number<AddressDirectOperand>(const uint8_t register_number) {
+    return std::make_unique<AddressDirectOperand>(register_number);
 }
 
-INSTANTIATE_TYPED_TEST_CASE_P(AddressDirectOperand, OperandRegisterNumberTest, address_direct_operand);
+INSTANTIATE_TYPED_TEST_CASE_P(AddressDirectOperand, OperandRegisterNumberTest, AddressDirectOperand);
 
 TEST_F(AddressDirectOperandTest, GetModeField) {
     EXPECT_EQ(0b001, operand.get_mode_field());

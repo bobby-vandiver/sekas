@@ -9,17 +9,17 @@ namespace {
 class AddressIndirectDisplacementOperandTest : public ::testing::Test {
 protected:
     AddressIndirectDisplacementOperandTest() : operand(0, DISPLACEMENT) { }
-    address_indirect_displacement_operand operand;
+    AddressIndirectDisplacementOperand operand;
 };
 
 template <>
-operand::ptr create_with_register_number<address_indirect_displacement_operand>(const uint8_t register_number) {
-    return std::make_unique<address_indirect_displacement_operand>(register_number, DISPLACEMENT);
+Operand::Ptr create_with_register_number<AddressIndirectDisplacementOperand>(const uint8_t register_number) {
+    return std::make_unique<AddressIndirectDisplacementOperand>(register_number, DISPLACEMENT);
 }
 
 INSTANTIATE_TYPED_TEST_CASE_P(AddressIndirectDisplacementOperandTest,
                               OperandRegisterNumberTest,
-                              address_indirect_displacement_operand);
+                              AddressIndirectDisplacementOperand);
 
 TEST_F(AddressIndirectDisplacementOperandTest, GetModeField) {
     EXPECT_EQ(0b101, operand.get_mode_field());

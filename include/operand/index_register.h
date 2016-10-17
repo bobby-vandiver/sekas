@@ -4,43 +4,43 @@
 #include <cstdint>
 #include <memory>
 
-class index_register {
+class IndexRegister {
 public:
-    enum class type : uint8_t {
+    enum class Type : uint8_t {
         DATA,
         ADDRESS
     };
 
-    enum class size : uint8_t {
+    enum class Size : uint8_t {
         WORD,
         LONG_WORD
     };
 
-    enum class scale : uint8_t {
+    enum class Scale : uint8_t {
         ONE,
         TWO,
         FOUR,
         EIGHT
     };
 
-    typedef std::unique_ptr<index_register> ptr;
+    typedef std::unique_ptr<IndexRegister> Ptr;
 
-    explicit index_register(const uint8_t register_number, type type, size size, scale scale);
-    virtual ~index_register();
+    explicit IndexRegister(const uint8_t register_number, Type type, Size size, Scale scale);
+    virtual ~IndexRegister();
 
     uint8_t get_register_number() const;
 
-    type get_type() const;
-    size get_size() const;
-    scale get_scale() const;
+    Type get_type() const;
+    Size get_size() const;
+    Scale get_scale() const;
 
     uint8_t encode() const;
 
 private:
     const uint8_t register_number;
-    const type index_type;
-    const size index_size;
-    const scale index_scale;
+    const Type type;
+    const Size size;
+    const Scale scale;
 };
 
 #endif

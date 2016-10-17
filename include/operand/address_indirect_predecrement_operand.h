@@ -3,10 +3,10 @@
 
 #include "operand.h"
 
-class address_indirect_predecrement_operand : public operand {
+class AddressIndirectPredecrementOperand : public Operand {
 public:
-    explicit address_indirect_predecrement_operand(const uint8_t register_number);
-    virtual ~address_indirect_predecrement_operand();
+    explicit AddressIndirectPredecrementOperand(const uint8_t register_number);
+    virtual ~AddressIndirectPredecrementOperand();
 
     virtual uint8_t get_mode_field() const;
     virtual uint8_t get_register_field() const;

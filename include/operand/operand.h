@@ -4,11 +4,11 @@
 #include <cstdint>
 #include <memory>
 
-class operand {
+class Operand {
 public:
-    typedef std::unique_ptr<operand> ptr;
+    typedef std::unique_ptr<Operand> Ptr;
 
-    virtual ~operand() {}
+    virtual ~Operand() {}
 
     virtual uint8_t get_mode_field() const = 0;
     virtual uint8_t get_register_field() const = 0;

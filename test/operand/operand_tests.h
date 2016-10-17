@@ -7,7 +7,7 @@
 #include <stdexcept>
 
 template <typename T>
-operand::ptr create_with_register_number(const uint8_t register_number);
+Operand::Ptr create_with_register_number(const uint8_t register_number);
 
 template <typename T>
 class OperandRegisterNumberTest : public ::testing::Test {

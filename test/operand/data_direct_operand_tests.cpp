@@ -5,15 +5,15 @@
 class DataDirectOperandTest : public ::testing::Test {
 protected:
     DataDirectOperandTest() : operand(0) { }
-    data_direct_operand operand;
+    DataDirectOperand operand;
 };
 
 template <>
-operand::ptr create_with_register_number<data_direct_operand>(const uint8_t register_number) {
-    return std::make_unique<data_direct_operand>(register_number);
+Operand::Ptr create_with_register_number<DataDirectOperand>(const uint8_t register_number) {
+    return std::make_unique<DataDirectOperand>(register_number);
 }
 
-INSTANTIATE_TYPED_TEST_CASE_P(DataDirectOperand, OperandRegisterNumberTest, data_direct_operand);
+INSTANTIATE_TYPED_TEST_CASE_P(DataDirectOperand, OperandRegisterNumberTest, DataDirectOperand);
 
 TEST_F(DataDirectOperandTest, GetModeField) {
     EXPECT_EQ(0b000, operand.get_mode_field());

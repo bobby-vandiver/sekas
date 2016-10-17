@@ -4,12 +4,12 @@
 #include "operand.h"
 #include "index_register.h"
 
-class address_indirect_index_operand : public operand {
+class AddressIndirectIndexOperand : public Operand {
 public:
-    explicit address_indirect_index_operand(const uint8_t register_number,
+    explicit AddressIndirectIndexOperand(const uint8_t register_number,
                                             const uint8_t displacement,
-                                            index_register::ptr index_register);
-    virtual ~address_indirect_index_operand();
+                                            IndexRegister::Ptr index_register);
+    virtual ~AddressIndirectIndexOperand();
 
     virtual uint8_t get_mode_field() const;
     virtual uint8_t get_register_field() const;
@@ -20,7 +20,7 @@ public:
 private:
     const uint8_t register_number;
     const uint8_t displacement;
-    const index_register::ptr index;
+    const IndexRegister::Ptr index;
 };
 
 #endif
