@@ -29,8 +29,11 @@ uint16_t AddressIndirectIndexOperand::get_extension_word(const uint8_t idx) cons
         throw std::invalid_argument("address indirect with index operands have only one extension word");
     }
 
-    // TODO: Encode index register
-    uint16_t extension_word = static_cast<uint16_t>(displacement);
-    extension_word &= 0xff;
+    uint8_t encoded_index_register = index_register->encode();
+    uint16_t extension_word = static_cast<uint16_t>(encoded_index_register) << 8;
+
+    extension_word &= 0xff00;
+    extension_word |= displacement;
+
     return extension_word;
 }

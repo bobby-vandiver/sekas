@@ -32,7 +32,10 @@ public:
     Size get_size() const;
     Scale get_scale() const;
 
-    uint8_t encode() const;
+    virtual uint8_t encode() const;
+
+protected:
+    IndexRegister();
 
 private:
     const uint8_t register_number;

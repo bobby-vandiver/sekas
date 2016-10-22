@@ -40,6 +40,10 @@ IndexRegister::IndexRegister(const uint8_t register_number,
         scale(scale) {
 }
 
+IndexRegister::IndexRegister() :
+        IndexRegister(0, IndexRegister::Type::DATA, IndexRegister::Size::WORD, IndexRegister::Scale::ONE) {
+}
+
 IndexRegister::~IndexRegister() {
 }
 
