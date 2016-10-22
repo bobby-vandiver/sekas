@@ -2,7 +2,7 @@
 #include "operand_validation.h"
 
 AddressIndirectDisplacementOperand::AddressIndirectDisplacementOperand(const uint8_t register_number,
-                                                                             const uint16_t displacement) :
+                                                                       const uint16_t displacement) :
         register_number(operand_validation::validate_address_register_number(register_number)),
         displacement(displacement) {
 }
