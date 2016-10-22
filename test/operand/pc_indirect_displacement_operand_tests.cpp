@@ -24,7 +24,10 @@ TEST_F(ProgramCounterIndirectDisplacementOperandTest, GetExtensionWordCount) {
     EXPECT_EQ(1, operand.get_extension_word_count());
 }
 
+TEST_F(ProgramCounterIndirectDisplacementOperandTest, GetExtensionWordInvalid) {
+    EXPECT_THROW({ operand.get_extension_word(1); }, std::invalid_argument);
+}
+
 TEST_F(ProgramCounterIndirectDisplacementOperandTest, GetExtensionWord) {
     EXPECT_EQ(UNSIGNED_DISPLACEMENT, operand.get_extension_word(0));
-    EXPECT_THROW({ operand.get_extension_word(1); }, std::invalid_argument);
 }

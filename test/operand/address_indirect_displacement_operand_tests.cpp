@@ -30,7 +30,10 @@ TEST_F(AddressIndirectDisplacementOperandTest, GetExtensionWordCount) {
     EXPECT_EQ(1, operand.get_extension_word_count());
 }
 
-TEST_F(AddressIndirectDisplacementOperandTest, GetExtensionWord) {
+TEST_F(AddressIndirectDisplacementOperandTest, GetExtensionWordInvalid) {
     EXPECT_EQ(UNSIGNED_DISPLACEMENT, operand.get_extension_word(0));
+}
+
+TEST_F(AddressIndirectDisplacementOperandTest, GetExtensionWord) {
     EXPECT_THROW({ operand.get_extension_word(1); }, std::invalid_argument);
 }
