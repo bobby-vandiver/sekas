@@ -5,7 +5,7 @@
 
 class AddressIndirectDisplacementOperand : public Operand {
 public:
-    explicit AddressIndirectDisplacementOperand(const uint8_t register_number, const uint16_t displacement);
+    explicit AddressIndirectDisplacementOperand(const uint8_t register_number, const int16_t displacement);
     virtual ~AddressIndirectDisplacementOperand();
 
     virtual uint8_t get_mode_field() const;
@@ -16,7 +16,7 @@ public:
 
 private:
     const uint8_t register_number;
-    const uint16_t displacement;
+    const int16_t displacement;
 };
 
 #endif

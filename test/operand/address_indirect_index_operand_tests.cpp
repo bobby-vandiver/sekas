@@ -8,14 +8,16 @@ using ::testing::Return;
 
 namespace {
     const uint8_t ENCODED_INDEX_REGISTER = 0xbe;
-    const uint8_t DISPLACEMENT = 0xef;
+
+    const int8_t SIGNED_DISPLACEMENT = -2;
+    const uint8_t UNSIGNED_DISPLACEMENT = 0xfe;
 }
 
 class AddressIndirectIndexOperandTest : public ::testing::Test {
 protected:
     AddressIndirectIndexOperandTest() :
             mock_index_register(new MockIndexRegister()),
-            operand(0, DISPLACEMENT, mock_index_register) {
+            operand(0, SIGNED_DISPLACEMENT, mock_index_register) {
     }
 
     MockIndexRegister *mock_index_register;
@@ -24,7 +26,7 @@ protected:
 
 template <>
 std::unique_ptr<Operand> create_with_register_number<AddressIndirectIndexOperand>(const uint8_t register_number) {
-    return std::make_unique<AddressIndirectIndexOperand>(register_number, DISPLACEMENT, nullptr);
+    return std::make_unique<AddressIndirectIndexOperand>(register_number, SIGNED_DISPLACEMENT, nullptr);
 }
 
 INSTANTIATE_TYPED_TEST_CASE_P(AddressIndirectIndexOperandTest,
@@ -45,7 +47,7 @@ TEST_F(AddressIndirectIndexOperandTest, GetExtensionWordInvalid) {
 
 TEST_F(AddressIndirectIndexOperandTest, GetExtensionWordDisplacement) {
     EXPECT_CALL(*mock_index_register, encode());
-    EXPECT_EQ(static_cast<uint16_t>(DISPLACEMENT), operand.get_extension_word(0) & 0xff);
+    EXPECT_EQ(static_cast<uint16_t>(UNSIGNED_DISPLACEMENT), operand.get_extension_word(0) & 0xff);
 }
 
 TEST_F(AddressIndirectIndexOperandTest, GetExtensionWordIndexRegister) {

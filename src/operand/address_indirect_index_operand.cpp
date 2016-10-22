@@ -2,7 +2,7 @@
 #include "operand_validation.h"
 
 AddressIndirectIndexOperand::AddressIndirectIndexOperand(const uint8_t register_number,
-                                                         const uint8_t displacement,
+                                                         const int8_t displacement,
                                                          IndexRegister *index_register) :
         register_number(operand_validation::validate_address_register_number(register_number)),
         displacement(displacement),
@@ -33,7 +33,7 @@ uint16_t AddressIndirectIndexOperand::get_extension_word(const uint8_t idx) cons
     uint16_t extension_word = static_cast<uint16_t>(encoded_index_register) << 8;
 
     extension_word &= 0xff00;
-    extension_word |= displacement;
+    extension_word |= static_cast<uint8_t>(displacement);
 
     return extension_word;
 }

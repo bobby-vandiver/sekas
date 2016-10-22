@@ -3,18 +3,19 @@
 #include "operand/address_indirect_displacement_operand.h"
 
 namespace {
-    const uint16_t DISPLACEMENT = 0xf00d;
+    const int16_t SIGNED_DISPLACEMENT = -32768;
+    const uint16_t UNSIGNED_DISPLACEMENT = 0x8000;
 }
 
 class AddressIndirectDisplacementOperandTest : public ::testing::Test {
 protected:
-    AddressIndirectDisplacementOperandTest() : operand(0, DISPLACEMENT) { }
+    AddressIndirectDisplacementOperandTest() : operand(0, SIGNED_DISPLACEMENT) { }
     AddressIndirectDisplacementOperand operand;
 };
 
 template <>
 std::unique_ptr<Operand> create_with_register_number<AddressIndirectDisplacementOperand>(const uint8_t register_number) {
-    return std::make_unique<AddressIndirectDisplacementOperand>(register_number, DISPLACEMENT);
+    return std::make_unique<AddressIndirectDisplacementOperand>(register_number, SIGNED_DISPLACEMENT);
 }
 
 INSTANTIATE_TYPED_TEST_CASE_P(AddressIndirectDisplacementOperandTest,
@@ -30,6 +31,6 @@ TEST_F(AddressIndirectDisplacementOperandTest, GetExtensionWordCount) {
 }
 
 TEST_F(AddressIndirectDisplacementOperandTest, GetExtensionWord) {
-    EXPECT_EQ(DISPLACEMENT, operand.get_extension_word(0));
+    EXPECT_EQ(UNSIGNED_DISPLACEMENT, operand.get_extension_word(0));
     EXPECT_THROW({ operand.get_extension_word(1); }, std::invalid_argument);
 }
