@@ -7,8 +7,8 @@
 class AddressIndirectIndexOperand : public Operand {
 public:
     explicit AddressIndirectIndexOperand(const uint8_t register_number,
-                                            const uint8_t displacement,
-                                            std::unique_ptr<IndexRegister> index_register);
+                                         const uint8_t displacement,
+                                         IndexRegister *index_register);
     virtual ~AddressIndirectIndexOperand();
 
     virtual uint8_t get_mode_field() const;
