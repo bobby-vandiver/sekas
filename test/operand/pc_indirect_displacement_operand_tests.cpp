@@ -1,5 +1,4 @@
 #include "gtest/gtest.h"
-#include "operand_tests.h"
 #include "operand/pc_indirect_displacement_operand.h"
 
 namespace {
