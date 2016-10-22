@@ -11,6 +11,7 @@ set(OPERAND_SOURCES
         operand/address_indirect_postincrement_operand.cpp
         operand/address_indirect_predecrement_operand.cpp
         operand/address_indirect_displacement_operand.cpp
-        operand/address_indirect_index_operand.cpp)
+        operand/address_indirect_index_operand.cpp
+        operand/pc_indirect_displacement_operand.cpp)
 
 add_library(libsekas STATIC ${OPERAND_SOURCES})
