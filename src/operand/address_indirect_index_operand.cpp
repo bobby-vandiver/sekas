@@ -4,7 +4,7 @@
 AddressIndirectIndexOperand::AddressIndirectIndexOperand(const uint8_t register_number,
                                                          const int8_t displacement,
                                                          IndexRegister *index_register) :
-        register_number(operand_validation::validate_address_register_number(register_number)),
+        register_number(OperandValidation::validate_address_register_number(register_number)),
         displacement(displacement),
         index_register(std::unique_ptr<IndexRegister>(index_register)) {
 }

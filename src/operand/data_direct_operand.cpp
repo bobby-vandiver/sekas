@@ -2,7 +2,7 @@
 #include "operand_validation.h"
 
 DataDirectOperand::DataDirectOperand(const uint8_t register_number) :
-        register_number(operand_validation::validate_data_register_number(register_number)) {
+        register_number(OperandValidation::validate_data_register_number(register_number)) {
 }
 
 DataDirectOperand::~DataDirectOperand() {

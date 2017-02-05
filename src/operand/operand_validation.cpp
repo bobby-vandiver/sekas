@@ -17,12 +17,12 @@ namespace {
     }
 }
 
-uint8_t operand_validation::validate_data_register_number(const uint8_t register_number) {
+uint8_t OperandValidation::validate_data_register_number(const uint8_t register_number) {
     return validate_register_number(register_number, MAX_DATA_REGISTER_NUMBER,
                                     "data register number must be between 0 and 7");
 }
 
-uint8_t operand_validation::validate_address_register_number(const uint8_t register_number) {
+uint8_t OperandValidation::validate_address_register_number(const uint8_t register_number) {
     return validate_register_number(register_number, MAX_ADDRESS_REGISTER_NUMBER,
                                     "address register must be between 0 and 7");
 }

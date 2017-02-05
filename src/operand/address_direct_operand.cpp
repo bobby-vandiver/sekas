@@ -2,7 +2,7 @@
 #include "operand_validation.h"
 
 AddressDirectOperand::AddressDirectOperand(const uint8_t register_number) :
-        register_number(operand_validation::validate_address_register_number(register_number)) {
+        register_number(OperandValidation::validate_address_register_number(register_number)) {
 }
 
 AddressDirectOperand::~AddressDirectOperand() {

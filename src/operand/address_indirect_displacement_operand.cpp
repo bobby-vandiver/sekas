@@ -3,7 +3,7 @@
 
 AddressIndirectDisplacementOperand::AddressIndirectDisplacementOperand(const uint8_t register_number,
                                                                        const int16_t displacement) :
-        register_number(operand_validation::validate_address_register_number(register_number)),
+        register_number(OperandValidation::validate_address_register_number(register_number)),
         displacement(displacement) {
 }
 

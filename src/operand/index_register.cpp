@@ -5,10 +5,10 @@
 namespace {
     uint8_t validate_register_number(const uint8_t register_number, const IndexRegister::Type type) {
         if (type == IndexRegister::Type::DATA) {
-            return operand_validation::validate_data_register_number(register_number);
+            return OperandValidation::validate_data_register_number(register_number);
         }
         else {
-            return operand_validation::validate_address_register_number(register_number);
+            return OperandValidation::validate_address_register_number(register_number);
         }
     }
 

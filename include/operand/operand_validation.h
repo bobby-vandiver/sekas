@@ -3,7 +3,7 @@
 
 #include <cstdint>
 
-namespace operand_validation {
+namespace OperandValidation {
     uint8_t validate_data_register_number(const uint8_t register_number);
     uint8_t validate_address_register_number(const uint8_t register_number);
 }
