@@ -15,6 +15,7 @@ set(OPERAND_SOURCES
         operand/pc_indirect_displacement_operand.cpp
         operand/pc_indirect_index_operand.cpp
         operand/absolute_short_operand.cpp
-        operand/absolute_long_operand.cpp)
+        operand/absolute_long_operand.cpp
+        operand/immediate_operand.cpp)
 
 add_library(libsekas STATIC ${OPERAND_SOURCES})
