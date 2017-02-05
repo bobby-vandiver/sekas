@@ -17,7 +17,8 @@ set(OPERAND_TESTS
         operand/address_indirect_index_operand_tests.cpp
         operand/pc_indirect_displacement_operand_tests.cpp
         operand/pc_indirect_index_operand_tests.cpp
-        operand/absolute_short_operand_tests.cpp)
+        operand/absolute_short_operand_tests.cpp
+        operand/absolute_long_operand_tests.cpp)
 
 add_executable(unit_tests ${OPERAND_TESTS})
 
