@@ -18,4 +18,7 @@ set(OPERAND_SOURCES
         operand/absolute_long_operand.cpp
         operand/immediate_operand.cpp)
 
-add_library(libsekas STATIC ${OPERAND_SOURCES})
+set(UTILITY_SOURCES
+        utility/word_extraction.cpp)
+
+add_library(libsekas STATIC ${OPERAND_SOURCES} ${UTILITY_SOURCES})

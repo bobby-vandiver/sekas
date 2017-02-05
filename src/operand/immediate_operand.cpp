@@ -1,5 +1,6 @@
 #include <backward/strstream>
 #include "immediate_operand.h"
+#include "utility/word_extraction.h"
 
 namespace {
     void validate_index(const uint8_t idx, const uint8_t max) {
@@ -37,14 +38,13 @@ uint8_t ImmediateOperand::get_extension_word_count() const {
 uint16_t ImmediateOperand::get_extension_word(const uint8_t idx) const {
     if (length == DataLength::BYTE || length == DataLength::WORD) {
         validate_index(idx, 0);
-        return static_cast<uint16_t>(data & 0xffff);
+        return WordExtraction::get_low_word(data);
     }
 
     validate_index(idx, 1);
 
-    // TODO: Refactor to common place -- copied in AbsoluteLongOperand implementation
     if (idx == 0) {
-        return static_cast<uint16_t>((data & 0xffff0000) >> 16);
+        return WordExtraction::get_high_word(data);
     }
-    return static_cast<uint16_t>(data & 0xffff);
+    return WordExtraction::get_low_word(data);
 }

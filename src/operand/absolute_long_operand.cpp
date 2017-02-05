@@ -1,4 +1,5 @@
 #include "absolute_long_operand.h"
+#include "utility/word_extraction.h"
 
 AbsoluteLongOperand::AbsoluteLongOperand(const uint32_t address) :
         address(address) {
@@ -25,7 +26,7 @@ uint16_t AbsoluteLongOperand::get_extension_word(const uint8_t idx) const {
     }
 
     if (idx == 0) {
-        return static_cast<uint16_t>((address & 0xffff0000) >> 16);
+        return WordExtraction::get_high_word(address);
     }
-    return static_cast<uint16_t>(address & 0xffff);
+    return WordExtraction::get_low_word(address);
 }
